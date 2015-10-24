@@ -7,6 +7,17 @@
       <module fileurl="file://$PROJECT_DIR$/p0031firstproject/p0031firstproject.iml" filepath="$PROJECT_DIR$/p0031firstproject/p0031firstproject.iml" />
       <module fileurl="file://$PROJECT_DIR$/p0041basicviews/p0041basicviews.iml" filepath="$PROJECT_DIR$/p0041basicviews/p0041basicviews.iml" />
       <module fileurl="file://$PROJECT_DIR$/p0051layoutfiles/p0051layoutfiles.iml" filepath="$PROJECT_DIR$/p0051layoutfiles/p0051layoutfiles.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p0061_layouts/p0061_layouts.iml" filepath="$PROJECT_DIR$/p0061_layouts/p0061_layouts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p0072_layoutprop/p0072_layoutprop.iml" filepath="$PROJECT_DIR$/p0072_layoutprop/p0072_layoutprop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p0081_viewbyid/p0081_viewbyid.iml" filepath="$PROJECT_DIR$/p0081_viewbyid/p0081_viewbyid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p0091_onclickbuttons/p0091_onclickbuttons.iml" filepath="$PROJECT_DIR$/p0091_onclickbuttons/p0091_onclickbuttons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p0101_listener/p0101_listener.iml" filepath="$PROJECT_DIR$/p0101_listener/p0101_listener.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p0102_activitylistener/p0102_activitylistener.iml" filepath="$PROJECT_DIR$/p0102_activitylistener/p0102_activitylistener.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p0111_resvalues/p0111_resvalues.iml" filepath="$PROJECT_DIR$/p0111_resvalues/p0111_resvalues.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p0121_logandmess/p0121_logandmess.iml" filepath="$PROJECT_DIR$/p0121_logandmess/p0121_logandmess.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p0131_menusimple/p0131_menusimple.iml" filepath="$PROJECT_DIR$/p0131_menusimple/p0131_menusimple.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p0141_menuadv/p0141_menuadv.iml" filepath="$PROJECT_DIR$/p0141_menuadv/p0141_menuadv.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p0151_contextmenu/p0151_contextmenu.iml" filepath="$PROJECT_DIR$/p0151_contextmenu/p0151_contextmenu.iml" />
     </modules>
   </component>
 </project>

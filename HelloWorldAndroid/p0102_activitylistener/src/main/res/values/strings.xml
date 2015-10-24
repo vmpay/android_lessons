@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">P0102_ActivityListener</string>
+    <string name="tvTopText">Верхний текст</string>
+    <string name="btnTopText">Верхняя кнопка</string>
+</resources>
