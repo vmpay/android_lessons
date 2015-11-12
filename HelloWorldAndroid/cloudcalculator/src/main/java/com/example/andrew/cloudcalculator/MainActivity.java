@@ -9,6 +9,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+//import org.apache.http.legacy;
+
+import java.net.URI;
+
 public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     EditText etNum1;
@@ -26,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     TextView tvResult;
 
     String oper = "";
+    String tmp = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +121,33 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             case R.id.btnXpowY:
                 oper = "x^y";
                 result = (float) Math.pow(num1, num2);
+                HttpClient httpclient = HttpClients.createDefault();
+
+                try
+                {
+                    URIBuilder builder = new URIBuilder("https://calc274102.azure-api.net/Calc/add?a={a}&b={b}");
+
+
+                    URI uri = builder.build();
+                    HttpGet request = new HttpGet(uri);
+
+                    // Request body
+                    //StringEntity reqEntity = new StringEntity("{body}");
+                    //request.setEntity(reqEntity);
+
+                    HttpResponse response = httpclient.execute(request);
+                    HttpEntity entity = response.getEntity();
+
+                    if (entity != null)
+                    {
+                        //System.out.println(EntityUtils.toString(entity));
+                        tmp = EntityUtils.toString(entity);
+                    }
+                }
+                catch (Exception e)
+                {
+                   // System.out.println(e.getMessage());
+                }
                 break;
             default:
                 break;
@@ -115,6 +155,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         // формируем строку вывода
         //tvResult.setText(num1 + " " + oper + " " + num2 + " = " + result);
-        tvResult.setText(oper + " " + " Result = " + result);
+        tvResult.setText(oper + " " + " Result = " + result + tmp);
     }
 }
