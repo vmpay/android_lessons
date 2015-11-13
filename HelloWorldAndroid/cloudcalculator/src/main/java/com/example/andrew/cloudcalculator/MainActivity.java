@@ -19,6 +19,8 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 //import org.apache.http.legacy;
 
+//import com.squareup.okhttp.*;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,6 +29,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+/*import retrofit.*;
+import retrofit.http.GET;
+import retrofit.http.Header;*/
 
 
 public class MainActivity extends AppCompatActivity implements OnClickListener {
@@ -130,6 +136,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 result = num1 * num1;
                 break;
             case R.id.btnXpowY:
+                //String num1str = String.valueOf(num1);
+                //String num2str = String.valueOf(num2);
+                //String num1str = Float.toString(num1);
+                //String num2str = Float.toString(num2);
+                //final String myurl = "https://calc274102.azure-api.net/Calc/xpowy?a=" + num1 + "&b=" + num2;
+
+                final String myurl = "https://calc274102.azure-api.net/Calc/xpowy?a=2&b=3";
                 new Thread() {
 
                     @Override
@@ -137,13 +150,19 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 oper = "x^y";
                 //result = (float) Math.pow(num1, num2);
 
+                        /*@GET("https://calc274102.azure-api.net/Calc/add?a={num1}&b={num2}")
+                        retrofit.Call<User> getUser(@Header("Ocp-Apim-Subscription-Key") String apiKey)*/
+
 
 
                         try {
-                            URL url = new URL("https://github.com/vmpay");
-                            //URL url = new URL("https://calc274102.azure-api.net/Calc/add?a={num1}&b={num2}");
+                            //URL url = new URL("https://github.com/vmpay");
+
+
+                            //URL url = new URL("https://calc274102.azure-api.net/Calc/xpowy?a=2&b=3");
+                            URL url = new URL(myurl);
                             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                            //urlConnection.setRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
+                            urlConnection.addRequestProperty("Ocp-Apim-Subscription-Key", apiKey);//.setRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
                             InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                             //readStream(in);
                             //in.read();
@@ -200,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         // формируем строку вывода
         //tvResult.setText(num1 + " " + oper + " " + num2 + " = " + result);
-        tvResult.setText(oper + " " + " Result = " + result + tmp);
+        tvResult.setText(oper + " " + " Result = " + result + tmp );
     }
 
 
