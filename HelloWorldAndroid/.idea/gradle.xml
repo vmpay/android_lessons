@@ -10,23 +10,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/cloudcalculator" />
-            <option value="$PROJECT_DIR$/p0031firstproject" />
-            <option value="$PROJECT_DIR$/p0041basicviews" />
-            <option value="$PROJECT_DIR$/p0051layoutfiles" />
-            <option value="$PROJECT_DIR$/p0061_layouts" />
-            <option value="$PROJECT_DIR$/p0072_layoutprop" />
-            <option value="$PROJECT_DIR$/p0081_viewbyid" />
-            <option value="$PROJECT_DIR$/p0091_onclickbuttons" />
-            <option value="$PROJECT_DIR$/p0101_listener" />
-            <option value="$PROJECT_DIR$/p0102_activitylistener" />
-            <option value="$PROJECT_DIR$/p0111_resvalues" />
-            <option value="$PROJECT_DIR$/p0121_logandmess" />
-            <option value="$PROJECT_DIR$/p0131_menusimple" />
-            <option value="$PROJECT_DIR$/p0141_menuadv" />
-            <option value="$PROJECT_DIR$/p0151_contextmenu" />
-            <option value="$PROJECT_DIR$/p0161_dynamiclayout" />
           </set>
         </option>
       </GradleProjectSettings>

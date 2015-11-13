@@ -19,7 +19,15 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 //import org.apache.http.legacy;
 
-import java.net.URI;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 
 public class MainActivity extends AppCompatActivity implements OnClickListener {
 
@@ -39,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     String oper = "";
     String tmp = "";
+    String website = "https://calc274102.azure-api.net/Calc/add?a=2&b=3";
+    String apiKey = "1877991c30a7459e90e5b6a7b5b2445b";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         btnSqrt.setOnClickListener(this);
         btnXkwadrat.setOnClickListener(this);
     }
+
 
     @Override
     public void onClick(View v) {
@@ -119,13 +130,44 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 result = num1 * num1;
                 break;
             case R.id.btnXpowY:
+                new Thread() {
+
+                    @Override
+                    public void run() {
                 oper = "x^y";
-                result = (float) Math.pow(num1, num2);
-                HttpClient httpclient = HttpClients.createDefault();
+                //result = (float) Math.pow(num1, num2);
+
+
+
+                        try {
+                            URL url = new URL("https://github.com/vmpay");
+                            //URL url = new URL("https://calc274102.azure-api.net/Calc/add?a={num1}&b={num2}");
+                            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                            //urlConnection.setRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
+                            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                            //readStream(in);
+                            //in.read();
+                            tmp = convertStreamToString(in);
+                            urlConnection.disconnect();
+                            //tmp = in.toString();
+
+
+
+                        } catch (MalformedURLException e) {
+                           // e.printStackTrace();
+                        } catch (IOException e) {
+                            //e.printStackTrace();
+                        }
+
+
+
+
+
+                /*HttpClient httpclient = HttpClients.createDefault();
 
                 try
                 {
-                    URIBuilder builder = new URIBuilder("https://calc274102.azure-api.net/Calc/add?a={a}&b={b}");
+                    URIBuilder builder = new URIBuilder("https://calc274102.azure-api.net/Calc/add?a={num1}&b={num2}");
 
 
                     URI uri = builder.build();
@@ -147,7 +189,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 catch (Exception e)
                 {
                    // System.out.println(e.getMessage());
-                }
+                }*/
+
+                    }
+                }.start();
                 break;
             default:
                 break;
@@ -157,4 +202,30 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         //tvResult.setText(num1 + " " + oper + " " + num2 + " = " + result);
         tvResult.setText(oper + " " + " Result = " + result + tmp);
     }
+
+
+
+
+
+    public String convertStreamToString(InputStream is) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+
+        String line = null;
+        try {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append('\n');
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return sb.toString();
+    }
+
 }
