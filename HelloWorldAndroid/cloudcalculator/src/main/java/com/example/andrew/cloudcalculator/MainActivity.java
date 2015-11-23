@@ -3,6 +3,7 @@ package com.example.andrew.cloudcalculator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -53,8 +54,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     String oper = "";
     String tmp = "";
-    String website = "https://calc274102.azure-api.net/Calc/add?a=2&b=3";
+    //String website = "https://calc274102.azure-api.net/Calc/add?a=2&b=3";
     String apiKey = "1877991c30a7459e90e5b6a7b5b2445b";
+    private static final String TAG = "URL-TAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +95,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         float num1 = 0;
         float num2 = 0;
         float result = 0;
+        int num1int = 1;
+        int num2int = 2;
+
 
         // Проверяем поля на пустоту
         if (TextUtils.isEmpty(etNum1.getText().toString())
@@ -103,11 +108,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         // читаем EditText и заполняем переменные числами
         num1 = Float.parseFloat(etNum1.getText().toString());
         num2 = Float.parseFloat(etNum2.getText().toString());
+        num1int = Integer.parseInt(etNum1.getText().toString());
+        num2int = Integer.parseInt(etNum2.getText().toString());
 
         // определяем нажатую кнопку и выполняем соответствующую операцию
         // в oper пишем операцию, потом будем использовать в выводе
         switch (v.getId()) {
             case R.id.btnAdd:
+                Log.d(TAG, "num1int=" + num1int + " num2int=" + num2int);
                 oper = "+";
                 result = num1 + num2;
                 break;
@@ -136,80 +144,43 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 result = num1 * num1;
                 break;
             case R.id.btnXpowY:
-                //String num1str = String.valueOf(num1);
-                //String num2str = String.valueOf(num2);
-                //String num1str = Float.toString(num1);
-                //String num2str = Float.toString(num2);
-                //final String myurl = "https://calc274102.azure-api.net/Calc/xpowy?a=" + num1 + "&b=" + num2;
-
-                final String myurl = "https://calc274102.azure-api.net/Calc/xpowy?a=2&b=3";
+                final String myurl = "https://calc274102.azure-api.net/Calc/xpowy?a=" + num1int + "&b=" + num2int;
+                //final String myurl = "https://calc274102.azure-api.net/Calc/xpowy?a=2&b=3";
+                Log.d(TAG, myurl);
                 new Thread() {
-
                     @Override
                     public void run() {
-                oper = "x^y";
+                oper = "^";
                 //result = (float) Math.pow(num1, num2);
-
                         /*@GET("https://calc274102.azure-api.net/Calc/add?a={num1}&b={num2}")
                         retrofit.Call<User> getUser(@Header("Ocp-Apim-Subscription-Key") String apiKey)*/
 
-
-
                         try {
-                            //URL url = new URL("https://github.com/vmpay");
-
-
-                            //URL url = new URL("https://calc274102.azure-api.net/Calc/xpowy?a=2&b=3");
                             URL url = new URL(myurl);
                             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                            urlConnection.addRequestProperty("Ocp-Apim-Subscription-Key", apiKey);//.setRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
-                            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                            //readStream(in);
-                            //in.read();
-                            tmp = convertStreamToString(in);
-                            urlConnection.disconnect();
-                            //tmp = in.toString();
-
-
+                            urlConnection.addRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
+                            try {
+                                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                                //tmp = convertStreamToString(in);
+                                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                                StringBuilder result = new StringBuilder();
+                                String line;
+                                while((line = reader.readLine()) != null) {
+                                    result.append(line);
+                                }
+                                tmp = result.toString();
+                            } finally{
+                                Log.d(TAG, "Finally urlConnection.disconnect()");
+                                urlConnection.disconnect();
+                            }
 
                         } catch (MalformedURLException e) {
-                           // e.printStackTrace();
+                            Log.d(TAG, "MalformedURLException");
+                            //e.printStackTrace();
                         } catch (IOException e) {
+                            Log.d(TAG, "IOException");
                             //e.printStackTrace();
                         }
-
-
-
-
-
-                /*HttpClient httpclient = HttpClients.createDefault();
-
-                try
-                {
-                    URIBuilder builder = new URIBuilder("https://calc274102.azure-api.net/Calc/add?a={num1}&b={num2}");
-
-
-                    URI uri = builder.build();
-                    HttpGet request = new HttpGet(uri);
-
-                    // Request body
-                    //StringEntity reqEntity = new StringEntity("{body}");
-                    //request.setEntity(reqEntity);
-
-                    HttpResponse response = httpclient.execute(request);
-                    HttpEntity entity = response.getEntity();
-
-                    if (entity != null)
-                    {
-                        //System.out.println(EntityUtils.toString(entity));
-                        tmp = EntityUtils.toString(entity);
-                    }
-                }
-                catch (Exception e)
-                {
-                   // System.out.println(e.getMessage());
-                }*/
-
                     }
                 }.start();
                 break;
@@ -219,7 +190,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         // формируем строку вывода
         //tvResult.setText(num1 + " " + oper + " " + num2 + " = " + result);
-        tvResult.setText(oper + " " + " Result = " + result + tmp );
+        if (oper.equals("^")) {
+            Log.d(TAG, "Zashli w if TRUE output tmp=" + tmp);
+            tvResult.setText(num1 + oper + num2 + "=" + tmp);
+        }
+        else {
+            Log.d(TAG, "Zashli w if FALSE output tmp=" + tmp);
+            tvResult.setText(num1 + oper + num2 + "=" + result);
+        }
     }
 
 
