@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         // в oper пишем операцию, потом будем использовать в выводе
         switch (v.getId()) {
             case R.id.btnAdd:
-                Log.d(TAG, "num1int=" + num1int + " num2int=" + num2int);
+                //Log.d(TAG, "num1int=" + num1int + " num2int=" + num2int);
                 oper = "+";
                 //result = num1 + num2;
                 myurl = "https://calc274102.azure-api.net/Calc/add?a=" + num1int + "&b=" + num2int;
@@ -185,7 +186,18 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             Log.d(TAG, "Zashli w if FALSE output tmp=" + tmp);
             tvResult.setText(num1 + oper + num2 + "=" + result);
         }*/
-        //tvResult.setText(num1int + oper + num2int + "=" + tmp);
+        int i=0;
+        Toast.makeText(this, "Waiting server response...", Toast.LENGTH_SHORT).show();
+        while(tmp.isEmpty()){
+            i++;
+            if (i>1000000000){
+                Toast.makeText(this, "Connection timeout", Toast.LENGTH_LONG).show();
+                break;
+            }
+        }
+        Log.d(TAG, "i="+i);
+        tvResult.setText(num1int + oper + num2int + "=" + tmp);
+        tmp="";
     }
 
 
