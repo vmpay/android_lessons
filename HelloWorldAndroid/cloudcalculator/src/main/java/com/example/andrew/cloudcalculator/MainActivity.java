@@ -49,11 +49,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     Button btnJedenprzezx;
     Button btnSqrt;
     Button btnXkwadrat;
+    Button btnResult;
 
     TextView tvResult;
 
     String oper = "";
     String tmp = "";
+    String myurl = "";
     //String website = "https://calc274102.azure-api.net/Calc/add?a=2&b=3";
     String apiKey = "1877991c30a7459e90e5b6a7b5b2445b";
     private static final String TAG = "URL-TAG";
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         btnJedenprzezx = (Button) findViewById(R.id.btnJedenprzezx);
         btnSqrt = (Button) findViewById(R.id.btnSqrt);
         btnXkwadrat = (Button) findViewById(R.id.btnXkwadrat);
+        btnResult = (Button) findViewById(R.id.btnResult);
 
         tvResult = (TextView) findViewById(R.id.tvResult);
 
@@ -86,15 +89,16 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         btnJedenprzezx.setOnClickListener(this);
         btnSqrt.setOnClickListener(this);
         btnXkwadrat.setOnClickListener(this);
+        btnResult.setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View v) {
         // TODO Auto-generated method stub
-        float num1 = 0;
-        float num2 = 0;
-        float result = 0;
+        //float num1 = 0;
+        //float num2 = 0;
+        //float result = 0;
         int num1int = 1;
         int num2int = 2;
 
@@ -106,8 +110,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }
 
         // читаем EditText и заполняем переменные числами
-        num1 = Float.parseFloat(etNum1.getText().toString());
-        num2 = Float.parseFloat(etNum2.getText().toString());
+        //num1 = Float.parseFloat(etNum1.getText().toString());
+        //num2 = Float.parseFloat(etNum2.getText().toString());
         num1int = Integer.parseInt(etNum1.getText().toString());
         num2int = Integer.parseInt(etNum2.getText().toString());
 
@@ -117,94 +121,118 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             case R.id.btnAdd:
                 Log.d(TAG, "num1int=" + num1int + " num2int=" + num2int);
                 oper = "+";
-                result = num1 + num2;
+                //result = num1 + num2;
+                myurl = "https://calc274102.azure-api.net/Calc/add?a=" + num1int + "&b=" + num2int;
+                tmp = SendToAPI(myurl);
                 break;
             case R.id.btnSub:
                 oper = "-";
-                result = num1 - num2;
+                //result = num1 - num2;
+                myurl = "https://calc274102.azure-api.net/Calc/sub?a=" + num1int + "&b=" + num2int;
+                tmp = SendToAPI(myurl);
                 break;
             case R.id.btnMult:
                 oper = "*";
-                result = num1 * num2;
+                //result = num1 * num2;
+                myurl = "https://calc274102.azure-api.net/Calc/mul?a=" + num1int + "&b=" + num2int;
+                tmp = SendToAPI(myurl);
                 break;
             case R.id.btnDiv:
                 oper = "/";
-                result = num1 / num2;
+                //result = num1 / num2;
+                myurl = "https://calc274102.azure-api.net/Calc/div?a=" + num1int + "&b=" + num2int;
+                tmp = SendToAPI(myurl);
                 break;
             case R.id.btnJedenprzezx:
                 oper = "1/x";
-                result = 1 / num1;
+                //result = 1 / num1;
+                myurl = "https://calc274102.azure-api.net/Calc/jedenprzezx?a=" + num1int;
+                tmp = SendToAPI(myurl);
                 break;
             case R.id.btnSqrt:
                 oper = "sqrt";
-                result = (float) Math.sqrt(num1);
+                //result = (float) Math.sqrt(num1);
+                myurl = "https://calc274102.azure-api.net/Calc/sqrt?a=" + num1int;
+                tmp = SendToAPI(myurl);
                 break;
             case R.id.btnXkwadrat:
                 oper = "x^2";
-                result = num1 * num1;
+                //esult = num1 * num1;
+                myurl = "https://calc274102.azure-api.net/Calc/xpow2?a=" + num1int;
+                tmp = SendToAPI(myurl);
                 break;
             case R.id.btnXpowY:
-                final String myurl = "https://calc274102.azure-api.net/Calc/xpowy?a=" + num1int + "&b=" + num2int;
-                //final String myurl = "https://calc274102.azure-api.net/Calc/xpowy?a=2&b=3";
-                Log.d(TAG, myurl);
-                new Thread() {
-                    @Override
-                    public void run() {
                 oper = "^";
-                //result = (float) Math.pow(num1, num2);
-                        /*@GET("https://calc274102.azure-api.net/Calc/add?a={num1}&b={num2}")
-                        retrofit.Call<User> getUser(@Header("Ocp-Apim-Subscription-Key") String apiKey)*/
-
-                        try {
-                            URL url = new URL(myurl);
-                            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                            urlConnection.addRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
-                            try {
-                                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                                //tmp = convertStreamToString(in);
-                                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                                StringBuilder result = new StringBuilder();
-                                String line;
-                                while((line = reader.readLine()) != null) {
-                                    result.append(line);
-                                }
-                                tmp = result.toString();
-                            } finally{
-                                Log.d(TAG, "Finally urlConnection.disconnect()");
-                                urlConnection.disconnect();
-                            }
-
-                        } catch (MalformedURLException e) {
-                            Log.d(TAG, "MalformedURLException");
-                            //e.printStackTrace();
-                        } catch (IOException e) {
-                            Log.d(TAG, "IOException");
-                            //e.printStackTrace();
-                        }
-                    }
-                }.start();
+                myurl = "https://calc274102.azure-api.net/Calc/xpowy?a=" + num1int + "&b=" + num2int;
+                //final String myurl = "https://calc274102.azure-api.net/Calc/xpowy?a=2&b=3";
+                //Log.d(TAG, myurl);
+                tmp = SendToAPI(myurl);
                 break;
-            default:
+            case R.id.btnResult: // После нажатия кнопки результат появляется результат вычислений
+                // формируем строку вывода
+                tvResult.setText(num1int + oper + num2int + "=" + tmp); // Можно поиграться с форматированием вывода
+            default: // но мне лень =)
                 break;
         }
 
         // формируем строку вывода
         //tvResult.setText(num1 + " " + oper + " " + num2 + " = " + result);
-        if (oper.equals("^")) {
+        /*if (oper.equals("^")) {
             Log.d(TAG, "Zashli w if TRUE output tmp=" + tmp);
             tvResult.setText(num1 + oper + num2 + "=" + tmp);
         }
         else {
             Log.d(TAG, "Zashli w if FALSE output tmp=" + tmp);
             tvResult.setText(num1 + oper + num2 + "=" + result);
-        }
+        }*/
+        //tvResult.setText(num1int + oper + num2int + "=" + tmp);
     }
 
 
 
 
+    public String SendToAPI(/*final*/ String url) {
+        final String myurl = url;
+        Log.d(TAG, myurl);
+        new Thread() {
+            @Override
+            public void run() {
 
-    public String convertStreamToString(InputStream is) {
+                //result = (float) Math.pow(num1, num2);
+                        /*@GET("https://calc274102.azure-api.net/Calc/add?a={num1}&b={num2}")
+                        retrofit.Call<User> getUser(@Header("Ocp-Apim-Subscription-Key") String apiKey)*/
+
+                try {
+                    URL url = new URL(myurl);
+                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                    urlConnection.addRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
+                    try {
+                        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                        //tmp = convertStreamToString(in);
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                        StringBuilder result = new StringBuilder();
+                        String line;
+                        while((line = reader.readLine()) != null) {
+                            result.append(line);
+                        }
+                        tmp = result.toString();
+                    } finally{
+                        //Log.d(TAG, "Finally urlConnection.disconnect()");
+                        urlConnection.disconnect();
+                    }
+                } catch (MalformedURLException e) {
+                    Log.d(TAG, "MalformedURLException");
+                    //e.printStackTrace();
+                } catch (IOException e) {
+                    Log.d(TAG, "IOException");
+                    //e.printStackTrace();
+                }
+            }
+        }.start();
+        //Log.d(TAG, "before return tmp=" + tmp);
+        return tmp;
+    }
+    /*public String convertStreamToString(InputStream is) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
 
@@ -223,6 +251,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             }
         }
         return sb.toString();
-    }
+    }*/
 
 }
