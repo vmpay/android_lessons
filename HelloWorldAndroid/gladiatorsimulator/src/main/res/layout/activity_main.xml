@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout0"
+        android:layout_marginLeft="10pt"
+        android:layout_marginRight="10pt"
+        android:layout_marginTop="3pt">
+    <TextView android:text="Gladiator simulator!" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:layout_marginLeft="10pt"
+        android:layout_marginRight="10pt"
+        android:layout_marginTop="3pt">
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Stat points left"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/statsleft_string">
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:text="15"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/statsleft_int">
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout2"
+        android:layout_marginTop="3pt"
+        android:layout_marginLeft="5pt"
+        android:layout_marginRight="5pt">
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Hit points bonus"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/hp_string">
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:text="0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/hp_int">
+        </TextView>
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="+"
+            android:textSize="8pt"
+            android:id="@+id/btnAddHP">
+        </Button>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout3"
+        android:layout_marginTop="3pt"
+        android:layout_marginLeft="5pt"
+        android:layout_marginRight="5pt">
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Attack points bonus"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/ap_string">
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:text="0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/ap_int">
+        </TextView>
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="+"
+            android:textSize="8pt"
+            android:id="@+id/btnAddAP">
+        </Button>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout4"
+        android:layout_marginTop="3pt"
+        android:layout_marginLeft="5pt"
+        android:layout_marginRight="5pt">
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Critical strike change bonus"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/crit_string">
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:text="0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/crit_int">
+        </TextView>
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="+"
+            android:textSize="8pt"
+            android:id="@+id/btnAddCrit">
+        </Button>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout5"
+        android:layout_marginTop="3pt"
+        android:layout_marginLeft="5pt"
+        android:layout_marginRight="5pt">
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="Fight!"
+            android:textSize="8pt"
+            android:id="@+id/btnFight">
+        </Button>
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="Result"
+            android:textSize="8pt"
+            android:id="@+id/btnResult">
+        </Button>
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="Reset"
+            android:textSize="8pt"
+            android:id="@+id/btnReset">
+        </Button>
+    </LinearLayout>
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="5pt"
+        android:layout_marginRight="5pt"
+        android:textSize="12pt"
+        android:layout_marginTop="3pt"
+        android:id="@+id/tvResult"
+        android:gravity="center_horizontal">
+    </TextView>
+</LinearLayout>
+
+
+

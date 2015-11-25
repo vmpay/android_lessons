@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HelloWorldAndroid.iml" filepath="$PROJECT_DIR$/HelloWorldAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloudcalculator/cloudcalculator.iml" filepath="$PROJECT_DIR$/cloudcalculator/cloudcalculator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gladiatorsimulator/gladiatorsimulator.iml" filepath="$PROJECT_DIR$/gladiatorsimulator/gladiatorsimulator.iml" />
     </modules>
   </component>
 </project>
