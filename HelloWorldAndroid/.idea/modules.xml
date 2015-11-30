@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/HelloWorldAndroid.iml" filepath="$PROJECT_DIR$/HelloWorldAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloudcalculator/cloudcalculator.iml" filepath="$PROJECT_DIR$/cloudcalculator/cloudcalculator.iml" />
       <module fileurl="file://$PROJECT_DIR$/gladiatorsimulator/gladiatorsimulator.iml" filepath="$PROJECT_DIR$/gladiatorsimulator/gladiatorsimulator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p0191_simplecalculator/p0191_simplecalculator.iml" filepath="$PROJECT_DIR$/p0191_simplecalculator/p0191_simplecalculator.iml" />
     </modules>
   </component>
 </project>
