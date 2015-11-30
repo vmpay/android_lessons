@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     String result = "";
     String tmp = "Empty";
     String myurl = "";
-    String apiKey = "1877991c30a7459e90e5b6a7b5b2445b";
+    String apiKey = "8651fa249e0541e09bf57da564511763";
     private static final String TAG = "URL-TAG";
     int num1int = 1;
     int num2int = 2;
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             case R.id.btnAdd:
                 oper = "+";
                 //result = num1 + num2;
-                myurl = "https://calc274102.azure-api.net/Calc/add?a=" + num1int + "&b=" + num2int;
+                myurl = "https://gladiator274102.azure-api.net/Calc/add?a=" + num1int + "&b=" + num2int;
                 //tmp = SendToAPI(myurl);
                 Toast.makeText(this, "Waiting for server response", Toast.LENGTH_SHORT).show();
                 new SentToApi().execute(myurl);
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             case R.id.btnSub:
                 oper = "-";
                 //result = num1 - num2;
-                myurl = "https://calc274102.azure-api.net/Calc/sub?a=" + num1int + "&b=" + num2int;
+                myurl = "https://gladiator274102.azure-api.net/Calc/sub?a=" + num1int + "&b=" + num2int;
                 Toast.makeText(this, "Waiting for server response", Toast.LENGTH_SHORT).show();
                 //tmp = SendToAPI(myurl);
                 new SentToApi().execute(myurl);
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             case R.id.btnMult:
                 oper = "*";
                 //result = num1 * num2;
-                myurl = "https://calc274102.azure-api.net/Calc/mul?a=" + num1int + "&b=" + num2int;
+                myurl = "https://gladiator274102.azure-api.net/Calc/mul?a=" + num1int + "&b=" + num2int;
                 Toast.makeText(this, "Waiting for server response", Toast.LENGTH_SHORT).show();
                 //tmp = SendToAPI(myurl);
                 new SentToApi().execute(myurl);
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             case R.id.btnDiv:
                 oper = "/";
                 //result = num1 / num2;
-                myurl = "https://calc274102.azure-api.net/Calc/div?a=" + num1int + "&b=" + num2int;
+                myurl = "https://gladiator274102.azure-api.net/Calc/div?a=" + num1int + "&b=" + num2int;
                 Toast.makeText(this, "Waiting for server response", Toast.LENGTH_SHORT).show();
                 //tmp = SendToAPI(myurl);
                 new SentToApi().execute(myurl);
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             case R.id.btnJedenprzezx:
                 oper = "1/x";
                 //result = 1 / num1;
-                myurl = "https://calc274102.azure-api.net/Calc/jedenprzezx?a=" + num1int;
+                myurl = "https://gladiator274102.azure-api.net/Calc/jedenprzezx?a=" + num1int;
                 Toast.makeText(this, "Waiting for server response", Toast.LENGTH_SHORT).show();
                 //tmp = SendToAPI(myurl);
                 new SentToApi().execute(myurl);
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             case R.id.btnSqrt:
                 oper = "sqrt";
                 //result = (float) Math.sqrt(num1);
-                myurl = "https://calc274102.azure-api.net/Calc/sqrt?a=" + num1int;
+                myurl = "https://gladiator274102.azure-api.net/Calc/sqrt?a=" + num1int;
                 Toast.makeText(this, "Waiting for server response", Toast.LENGTH_SHORT).show();
                 //tmp = SendToAPI(myurl);
                 new SentToApi().execute(myurl);
@@ -149,14 +149,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             case R.id.btnXkwadrat:
                 oper = "x^2";
                 //result = num1 * num1;
-                myurl = "https://calc274102.azure-api.net/Calc/xpow2?a=" + num1int;
+                myurl = "https://gladiator274102.azure-api.net/Calc/xpow2?a=" + num1int;
                 Toast.makeText(this, "Waiting for server response", Toast.LENGTH_SHORT).show();
                 //tmp = SendToAPI(myurl);
                 new SentToApi().execute(myurl);
                 break;
             case R.id.btnXpowY:
                 oper = "^";
-                myurl = "https://calc274102.azure-api.net/Calc/xpowy?a=" + num1int + "&b=" + num2int;
+                myurl = "https://gladiator274102.azure-api.net/Calc/xpowy?a=" + num1int + "&b=" + num2int;
                 Toast.makeText(this, "Waiting for server response", Toast.LENGTH_SHORT).show();
                 //Log.d(TAG, myurl);
                 //tmp = SendToAPI(myurl);
