@@ -1,5 +1,6 @@
 package com.example.andrew.gladiatorsimulator;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -128,11 +129,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 }
                 myurl = "https://gladiator274102.azure-api.net/Gladiator/fight?a=" + hp + "&b=" + ap + "&c=" + crit + "&d=" + lvl;
-                tmp = SendToAPI(myurl);
-                //Toast.makeText(this, "Cannot connect", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Waiting for server response...", Toast.LENGTH_SHORT).show();
+                new SentToApi().execute(myurl);
                 break;
             case R.id.btnResult:
-                tvResult.setText(""+tmp);
+                // TODO: Add logs layout
+                Toast.makeText(this, "Result logs are coming soon...", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btnReset:
                 statsleft=15;
@@ -152,39 +154,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public String SendToAPI(String url) {
-        final String myurl = url;
-        Log.d(TAG, myurl);
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL(myurl);
-                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                    urlConnection.addRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
-                    try {
-                        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                        StringBuilder result = new StringBuilder();
-                        String line;
-                        while((line = reader.readLine()) != null) {
-                            result.append(line);
-                        }
-                        tmp = result.toString();
-                    } finally{
-                        //Log.d(TAG, "Finally urlConnection.disconnect()");
-                        urlConnection.disconnect();
-                    }
-                } catch (MalformedURLException e) {
-                    Log.d(TAG, "MalformedURLException");
-                    //e.printStackTrace();
-                } catch (IOException e) {
-                    Log.d(TAG, "IOException");
-                    //e.printStackTrace();
+    private class SentToApi extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            Log.d(TAG, "Зашли в DoInBg: " + myurl);
+            final String myurl = params[0];
+            try {
+                URL url = new URL(myurl);
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.addRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                StringBuilder result = new StringBuilder();
+                String line;
+                while((line = reader.readLine()) != null) {
+                    result.append(line);
                 }
+                tmp = result.toString();
+                urlConnection.disconnect();
+            } catch (MalformedURLException e) {
+                Log.d(TAG, "MalformedURLException");
+                //e.printStackTrace();
+            } catch (IOException e) {
+                Log.d(TAG, "IOException");
+                tmp = "No connection to the server...";
+                //e.printStackTrace();
             }
-        }.start();
-        //Log.d(TAG, "before return tmp=" + tmp);
-        return tmp;
+
+            return tmp;
+        }
+        @Override
+        protected void onPostExecute(String result) {
+            Log.d(TAG, "Зашли в OnPostEx " + tmp);
+            tvResult.setText(""+tmp); // Вывод результата сюда надо было вставлять?
+            tmp = "Empty set in OnPostExecute";
+        }
     }
 }
