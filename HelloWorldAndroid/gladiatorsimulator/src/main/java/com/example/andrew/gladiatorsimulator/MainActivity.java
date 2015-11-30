@@ -4,7 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,12 +33,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView tvHP;
     TextView tvAP;
     TextView tvCrit;
-    String oper = "";
     String tmp = "Empty";
     String myurl = "";
     String apiKey = "8651fa249e0541e09bf57da564511763";
     int statsleft = 15, hp=0, ap=0, crit=0, lvl=0;
     private static final String TAG = "URL-TAG";
+    String[] data = {"Level 0", "Level 1", "Level 2", "Level 3"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +63,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnResult.setOnClickListener(this);
         btnReset.setOnClickListener(this);
         tvResult.setText("Choose stats");
+
+        // адаптер
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, data);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        spinner.setAdapter(adapter);
+        // заголовок
+        spinner.setPrompt("Choose enemy level");
+        // выделяем элемент
+        spinner.setSelection(0);
+        // устанавливаем обработчик нажатия
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // записываем позицию нажатого элемента
+                lvl = position;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
     }
 
     @Override
     public void onClick(View v) {
         // TODO Auto-generated method stub
-
         switch (v.getId()){
             case R.id.btnAddHP:
                 if (statsleft>0){
-                    //hp = hp + Integer.parseInt(tvHP.getText().toString());
                     hp = hp + 1;
                     tvHP.setText(""+hp);
                     statsleft = statsleft - 1;
@@ -99,6 +123,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, "No stat points left", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btnFight:
+                if (statsleft>0) {
+                    Toast.makeText(this, statsleft + " stat points left. Distribute it.", Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 myurl = "https://gladiator274102.azure-api.net/Gladiator/fight?a=" + hp + "&b=" + ap + "&c=" + crit + "&d=" + lvl;
                 tmp = SendToAPI(myurl);
                 //Toast.makeText(this, "Cannot connect", Toast.LENGTH_SHORT).show();
@@ -122,19 +150,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d(TAG, "Unexpected switch exit");
                 break;
         }
-
-
     }
 
-    public String SendToAPI(/*final*/ String url) {
+    public String SendToAPI(String url) {
         final String myurl = url;
         Log.d(TAG, myurl);
         new Thread() {
             @Override
             public void run() {
-
-
-
                 try {
                     URL url = new URL(myurl);
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

@@ -1,5 +1,6 @@
 package com.example.andrew.cloudcalculator;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,18 +12,6 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-//import org.apache.http.legacy;
-
-//import com.squareup.okhttp.*;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,9 +21,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/*import retrofit.*;
-import retrofit.http.GET;
-import retrofit.http.Header;*/
 
 
 public class MainActivity extends AppCompatActivity implements OnClickListener {
@@ -55,11 +41,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     TextView tvResult;
 
     String oper = "";
-    String tmp = "";
+    String result = "";
+    String tmp = "Empty";
     String myurl = "";
-    //String website = "https://calc274102.azure-api.net/Calc/add?a=2&b=3";
     String apiKey = "1877991c30a7459e90e5b6a7b5b2445b";
     private static final String TAG = "URL-TAG";
+    int num1int = 1;
+    int num2int = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,34 +85,24 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     @Override
     public void onClick(View v) {
         // TODO Auto-generated method stub
-        //float num1 = 0;
-        //float num2 = 0;
-        //float result = 0;
-        int num1int = 1;
-        int num2int = 2;
-
-
         // Проверяем поля на пустоту
         if (TextUtils.isEmpty(etNum1.getText().toString())
                 || TextUtils.isEmpty(etNum2.getText().toString())) {
+            Toast.makeText(this, "No input data. Fill the fields.", Toast.LENGTH_SHORT).show();
             return;
         }
-
         // читаем EditText и заполняем переменные числами
-        //num1 = Float.parseFloat(etNum1.getText().toString());
-        //num2 = Float.parseFloat(etNum2.getText().toString());
         num1int = Integer.parseInt(etNum1.getText().toString());
         num2int = Integer.parseInt(etNum2.getText().toString());
-
         // определяем нажатую кнопку и выполняем соответствующую операцию
         // в oper пишем операцию, потом будем использовать в выводе
         switch (v.getId()) {
             case R.id.btnAdd:
-                //Log.d(TAG, "num1int=" + num1int + " num2int=" + num2int);
                 oper = "+";
                 //result = num1 + num2;
                 myurl = "https://calc274102.azure-api.net/Calc/add?a=" + num1int + "&b=" + num2int;
-                tmp = SendToAPI(myurl);
+                //tmp = SendToAPI(myurl);
+                new SentToApi().execute(myurl);
                 break;
             case R.id.btnSub:
                 oper = "-";
@@ -158,49 +136,69 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 break;
             case R.id.btnXkwadrat:
                 oper = "x^2";
-                //esult = num1 * num1;
+                //result = num1 * num1;
                 myurl = "https://calc274102.azure-api.net/Calc/xpow2?a=" + num1int;
                 tmp = SendToAPI(myurl);
                 break;
             case R.id.btnXpowY:
                 oper = "^";
                 myurl = "https://calc274102.azure-api.net/Calc/xpowy?a=" + num1int + "&b=" + num2int;
-                //final String myurl = "https://calc274102.azure-api.net/Calc/xpowy?a=2&b=3";
                 //Log.d(TAG, myurl);
                 tmp = SendToAPI(myurl);
                 break;
             case R.id.btnResult: // После нажатия кнопки результат появляется результат вычислений
                 // формируем строку вывода
-                tvResult.setText(num1int + oper + num2int + "=" + tmp); // Можно поиграться с форматированием вывода
-            default: // но мне лень =)
+                result = tmp;
+                tvResult.setText(num1int + oper + num2int + "=" + result); // Можно поиграться с форматированием вывода
+                tmp = "Empty";// но мне лень =)
+                break;
+            default:
                 break;
         }
-
-        // формируем строку вывода
-        //tvResult.setText(num1 + " " + oper + " " + num2 + " = " + result);
-        /*if (oper.equals("^")) {
-            Log.d(TAG, "Zashli w if TRUE output tmp=" + tmp);
-            tvResult.setText(num1 + oper + num2 + "=" + tmp);
-        }
-        else {
-            Log.d(TAG, "Zashli w if FALSE output tmp=" + tmp);
-            tvResult.setText(num1 + oper + num2 + "=" + result);
-        }*/
-        int i=0;
-        Toast.makeText(this, "Waiting server response...", Toast.LENGTH_SHORT).show();
-        while(tmp.isEmpty()){
-            i++;
-            if (i>1000000000){
-                Toast.makeText(this, "Connection timeout", Toast.LENGTH_LONG).show();
-                break;
-            }
-        }
-        Log.d(TAG, "i="+i);
-        tvResult.setText(num1int + oper + num2int + "=" + tmp);
-        tmp="";
     }
 
 
+
+    private class SentToApi extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            //int count = params.length;
+            Log.d(TAG, "Зашли в DoInBg: " + myurl);
+            final String myurl = params[0];
+            try {
+                URL url = new URL(myurl);
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.addRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                StringBuilder result = new StringBuilder();
+                String line;
+                while((line = reader.readLine()) != null) {
+                    result.append(line);
+                }
+                tmp = result.toString();
+            } catch (MalformedURLException e) {
+                Log.d(TAG, "MalformedURLException");
+                e.printStackTrace();
+            } catch (IOException e) {
+                Log.d(TAG, "IOException");
+                e.printStackTrace();
+            }
+
+            return tmp;
+        }
+        protected void onProgressUpdate(Integer... progress) {
+            //setProgressPercent(progress[0]);
+        }
+
+        protected void onPostExecute(Long result) {
+            //showDialog("Downloaded " + result + " bytes");
+            Log.d(TAG, "Зашли в OnPostEx " + tmp);
+            String resultS = tmp;
+            tvResult.setText(num1int + oper + num2int + "=" + resultS); // Вывод результата сюда надо было вставлять?
+            tmp = "Empty";
+        }
+    }
 
 
     public String SendToAPI(/*final*/ String url) {
@@ -220,7 +218,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     urlConnection.addRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
                     try {
                         InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                        //tmp = convertStreamToString(in);
                         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                         StringBuilder result = new StringBuilder();
                         String line;

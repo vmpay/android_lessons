@@ -36,7 +36,6 @@
             android:id="@+id/statsleft_int">
         </TextView>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -125,6 +124,38 @@
             android:id="@+id/btnAddCrit">
         </Button>
     </LinearLayout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linearLayoutSpinner"
+        android:layout_marginTop="3pt"
+        android:layout_marginLeft="5pt"
+        android:layout_marginRight="5pt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Enenmy level:"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:id="@+id/tvSpinner">
+        </TextView>
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>
+    </LinearLayout>
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="5pt"
+        android:layout_marginRight="5pt"
+        android:textSize="12pt"
+        android:layout_marginTop="3pt"
+        android:id="@+id/tvResult"
+        android:gravity="center_horizontal">
+    </TextView>
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout5"
@@ -156,16 +187,7 @@
             android:id="@+id/btnReset">
         </Button>
     </LinearLayout>
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="5pt"
-        android:layout_marginRight="5pt"
-        android:textSize="12pt"
-        android:layout_marginTop="3pt"
-        android:id="@+id/tvResult"
-        android:gravity="center_horizontal">
-    </TextView>
+
 </LinearLayout>
 
 
