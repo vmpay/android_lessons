@@ -40,6 +40,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int statsleft = 15, hp=0, ap=0, crit=0, lvl=0;
     private static final String TAG = "URL-TAG";
     String[] data = {"Level 0", "Level 1", "Level 2", "Level 3"};
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "MainActivity: onRestart()");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "MainActivity: onStart()");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "MainActivity: onResume()");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "MainActivity: onPause()");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "MainActivity: onStop()");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "MainActivity: onDestroy()");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnFight.setOnClickListener(this);
         btnResult.setOnClickListener(this);
         btnReset.setOnClickListener(this);
-        tvResult.setText("Choose stats");
+        //tvResult.setText("Choose stats");
 
         // адаптер
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, data);
@@ -74,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // заголовок
         spinner.setPrompt("Choose enemy level");
         // выделяем элемент
-        spinner.setSelection(0);
+        spinner.setSelection(lvl);
         // устанавливаем обработчик нажатия
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
