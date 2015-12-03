@@ -1,0 +1,63 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .gitignore
+* ic_launcher-web.png
+* image_src\
+* image_src\Makefile
+* image_src\addbb.sh
+* image_src\ic_dialog_filelogging.ai
+* image_src\ic_dialog_playpause.ai
+* image_src\ic_dialog_playpause_pause.eps
+* image_src\ic_dialog_playpause_play.eps
+* image_src\ic_dialog_settings.ai
+* image_src\ic_dialog_settings.eps
+* image_src\ic_dialog_speed.ai
+* image_src\ic_dialog_speed_arrow_fast.eps
+* image_src\ic_dialog_speed_arrow_medium.eps
+* image_src\ic_dialog_speed_arrow_slow.eps
+* image_src\ic_dialog_speed_arrow_vfast.eps
+* image_src\ic_dialog_speed_fast.sine.eps
+* image_src\ic_dialog_speed_medium.sine.eps
+* image_src\ic_dialog_speed_slow.sine.eps
+* image_src\ic_dialog_speed_vfast.sine.eps
+* image_src\ic_dialog_target.ai
+* image_src\ic_dialog_target_both.eps
+* image_src\ic_dialog_target_file.eps
+* image_src\ic_dialog_target_graph.eps
+* image_src\ic_launcher_motionlog.ai
+* image_src\ic_stat_notify_logging.ai
+* image_src\ic_stat_notify_logging.eps
+* image_src\to_white.sh
+* proguard-project.txt
+* todo.txt
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => motionlog\src\main\AndroidManifest.xml
+* res\ => motionlog\src\main\res\
+* src\ => motionlog\src\main\java\
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)
