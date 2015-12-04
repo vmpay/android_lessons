@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/cloudcalculator" />
             <option value="$PROJECT_DIR$/gladiatorsimulator" />
             <option value="$PROJECT_DIR$/p0241_twoactivitystate" />
+            <option value="$PROJECT_DIR$/p0261_intentfilter" />
           </set>
         </option>
       </GradleProjectSettings>

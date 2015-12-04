@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/cloudcalculator/cloudcalculator.iml" filepath="$PROJECT_DIR$/cloudcalculator/cloudcalculator.iml" />
       <module fileurl="file://$PROJECT_DIR$/gladiatorsimulator/gladiatorsimulator.iml" filepath="$PROJECT_DIR$/gladiatorsimulator/gladiatorsimulator.iml" />
       <module fileurl="file://$PROJECT_DIR$/p0241_twoactivitystate/p0241_twoactivitystate.iml" filepath="$PROJECT_DIR$/p0241_twoactivitystate/p0241_twoactivitystate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p0261_intentfilter/p0261_intentfilter.iml" filepath="$PROJECT_DIR$/p0261_intentfilter/p0261_intentfilter.iml" />
     </modules>
   </component>
 </project>
