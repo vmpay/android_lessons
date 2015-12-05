@@ -1,5 +1,6 @@
 package com.example.andrew.gladiatorsimulator;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static java.lang.Integer.parseInt;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btnAddHP;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView tvAP;
     TextView tvCrit;
     String tmp = "Empty";
+    String logtext = "Empty log";
     String myurl = "";
     String apiKey = "8651fa249e0541e09bf57da564511763";
     int statsleft = 15, hp=0, ap=0, crit=0, lvl=0;
@@ -43,37 +47,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d(TAG, "MainActivity: onRestart() ");
+        //Log.d(TAG, "MainActivity: onRestart() ");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d(TAG, "MainActivity: onStart()");
+        //Log.d(TAG, "MainActivity: onStart()");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG, "MainActivity: onResume()");
+        //Log.d(TAG, "MainActivity: onResume()");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(TAG, "MainActivity: onPause()");
+        //Log.d(TAG, "MainActivity: onPause()");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(TAG, "MainActivity: onStop()");
+        //Log.d(TAG, "MainActivity: onStop()");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "MainActivity: onDestroy()");
+        //Log.d(TAG, "MainActivity: onDestroy()");
     }
 
     @Override
@@ -169,6 +173,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnResult:
                 // TODO: Add logs layout
+                Intent intent = new Intent(this, log_activity.class);
+                intent.putExtra("fightlog", logtext);
+                startActivity(intent);
                 Toast.makeText(this, "Result logs are coming soon...", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btnReset:
@@ -198,6 +205,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 URL url = new URL(myurl);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.addRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
+                urlConnection.setReadTimeout(10000);
+                urlConnection.setConnectTimeout(15000);
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                 StringBuilder result = new StringBuilder();
@@ -221,8 +230,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onPostExecute(String result) {
             Log.d(TAG, "Зашли в OnPostEx " + tmp);
-            tvResult.setText(""+tmp); // Вывод результата сюда надо было вставлять?
+            String res = tmp.substring(0, 2);
+            logtext = tmp.substring(2);
+            int code = parseInt(res, 10);
+            switch (code){
+                case 0:
+                    res = "Defeat!";
+                    break;
+                case 1:
+                    res = "Victory!";
+                    break;
+                default:
+                    res = "Unknown code result: "+code;
+                    break;
+            }
+
+            tvResult.setText(""+res);
             tmp = "Empty set in OnPostExecute";
+
         }
     }
 }
