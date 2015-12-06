@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(this, log_activity.class);
                 intent.putExtra("fightlog", logtext);
                 startActivity(intent);
-                Toast.makeText(this, "Result logs are coming soon...", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Result logs are coming soon...", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btnReset:
                 statsleft=15;
