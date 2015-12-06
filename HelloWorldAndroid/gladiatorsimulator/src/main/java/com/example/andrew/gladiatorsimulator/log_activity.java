@@ -17,7 +17,7 @@ public class log_activity extends AppCompatActivity {
         Intent intent = getIntent();
 
         String fightlog = intent.getStringExtra("fightlog");
-
-        tvView.setText("Fight log: " + fightlog );
+        fightlog = fightlog.replaceAll("NL", System.getProperty("line.separator"));
+        tvView.setText("" + fightlog );
     }
 }
