@@ -1,0 +1,79 @@
+package com.example.andrew.gladiatorsimulator;
+
+import android.os.AsyncTask;
+import android.util.Log;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import static java.lang.Integer.parseInt;
+
+/**
+ * Created by Andrew on 07.12.2015.
+ */
+public class SendToApi extends AsyncTask<String, Void, String> {
+    private static final String TAG = "SendToApiClass";
+    String apiKey = "8651fa249e0541e09bf57da564511763";
+    String tmp="Empty";
+
+    @Override
+    protected String doInBackground(String... params) {
+        Log.d(TAG, "Зашли в DoInBg: " + params[0]);
+        final String myurl = params[0];
+        try {
+            URL url = new URL(myurl);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.addRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
+            urlConnection.setReadTimeout(10000);
+            urlConnection.setConnectTimeout(15000);
+            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            StringBuilder result = new StringBuilder();
+            String line;
+            while((line = reader.readLine()) != null) {
+                result.append(line);
+            }
+            tmp = result.toString();
+            urlConnection.disconnect();
+        } catch (MalformedURLException e) {
+            Log.d(TAG, "MalformedURLException");
+            //e.printStackTrace();
+        } catch (IOException e) {
+            Log.d(TAG, "IOException");
+            tmp = "No connection to the server...";
+            //e.printStackTrace();
+        }
+        params[1] = tmp;
+        Log.d(TAG, "Выходим из DoInBg result=" + params[1]);
+        return tmp;
+    }
+    @Override
+    protected void onPostExecute(String result) {
+        Log.d(TAG, "Зашли в OnPostEx result=" + result);
+
+        /*String res = tmp.substring(0, 2);
+        logtext = tmp.substring(2);
+        int code = parseInt(res, 10);
+        switch (code){
+            case 0:
+                res = "Defeat!";
+                break;
+            case 1:
+                res = "Victory!";
+                break;
+            default:
+                res = "Unknown code result: "+code;
+                break;
+        }
+
+        tvResult.setText(""+res);
+        tmp = "Empty set in OnPostExecute";*/
+
+    }
+}

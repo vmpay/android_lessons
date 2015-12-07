@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         @Override
         protected void onPostExecute(String result) {
-            Log.d(TAG, "Зашли в OnPostEx " + tmp);
+            Log.d(TAG, "Зашли в OnPostEx tmp=" + tmp + " result= " + result);
             String res = tmp.substring(0, 2);
             logtext = tmp.substring(2);
             int code = parseInt(res, 10);
