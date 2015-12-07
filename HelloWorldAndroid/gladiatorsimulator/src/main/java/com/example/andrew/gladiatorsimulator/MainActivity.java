@@ -22,6 +22,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import com.example.andrew.gladiatorsimulator.SendToApi;
+
 import static java.lang.Integer.parseInt;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -169,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 myurl = "https://gladiator274102.azure-api.net/Gladiator/fight?a=" + hp + "&b=" + ap + "&c=" + crit + "&d=" + lvl;
                 Toast.makeText(this, "Waiting for server response...", Toast.LENGTH_SHORT).show();
-                new SentToApi().execute(myurl);
+                new SendGlad().execute(myurl);
                 break;
             case R.id.btnResult:
                 // TODO: Add logs layout
@@ -196,8 +198,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private class SentToApi extends AsyncTask<String, String, String> {
-        @Override
+    //private class SentToApi extends AsyncTask<String, String, String> {
+    private class SendGlad extends SendToApi {
+        /*@Override
         protected String doInBackground(String... params) {
             Log.d(TAG, "Зашли в DoInBg: " + myurl);
             final String myurl = params[0];
@@ -221,17 +224,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //e.printStackTrace();
             } catch (IOException e) {
                 Log.d(TAG, "IOException");
-                tmp = "No connection to the server...";
+                tmp = "02No connection to the server...";
                 //e.printStackTrace();
             }
 
             return tmp;
-        }
+        }*/
         @Override
         protected void onPostExecute(String result) {
-            Log.d(TAG, "Зашли в OnPostEx tmp=" + tmp + " result= " + result);
-            String res = tmp.substring(0, 2);
-            logtext = tmp.substring(2);
+            Log.d(TAG, "Зашли в OnPostEx result= " + result);
+            String res = result.substring(0, 2);
+            logtext = result.substring(2);
             int code = parseInt(res, 10);
             switch (code){
                 case 0:
@@ -239,6 +242,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 case 1:
                     res = "Victory!";
+                    break;
+                case 2:
+                    res = "Cannot connect to the server...";
                     break;
                 default:
                     res = "Unknown code result: "+code;

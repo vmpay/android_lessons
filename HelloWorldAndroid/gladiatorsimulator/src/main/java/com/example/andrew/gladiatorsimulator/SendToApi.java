@@ -46,18 +46,16 @@ public class SendToApi extends AsyncTask<String, Void, String> {
             //e.printStackTrace();
         } catch (IOException e) {
             Log.d(TAG, "IOException");
-            tmp = "No connection to the server...";
+            tmp = "02No connection to the server...";
             //e.printStackTrace();
         }
-        params[1] = tmp;
-        Log.d(TAG, "Выходим из DoInBg result=" + params[1]);
         return tmp;
     }
-    @Override
+    /*@Override
     protected void onPostExecute(String result) {
         Log.d(TAG, "Зашли в OnPostEx result=" + result);
 
-        /*String res = tmp.substring(0, 2);
+        String res = tmp.substring(0, 2);
         logtext = tmp.substring(2);
         int code = parseInt(res, 10);
         switch (code){
@@ -73,7 +71,7 @@ public class SendToApi extends AsyncTask<String, Void, String> {
         }
 
         tvResult.setText(""+res);
-        tmp = "Empty set in OnPostExecute";*/
+        tmp = "Empty set in OnPostExecute";
 
-    }
+    }*/
 }
