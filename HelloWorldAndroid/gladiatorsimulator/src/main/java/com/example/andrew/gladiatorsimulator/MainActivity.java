@@ -1,7 +1,6 @@
 package com.example.andrew.gladiatorsimulator;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,17 +11,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import com.example.andrew.gladiatorsimulator.SendToApi;
 
 import static java.lang.Integer.parseInt;
 
@@ -39,10 +27,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView tvHP;
     TextView tvAP;
     TextView tvCrit;
+    TextView tvWelcome;
     String tmp = "Empty";
     String logtext = "Empty log";
     String myurl = "";
-    String apiKey = "8651fa249e0541e09bf57da564511763";
     int statsleft = 15, hp=0, ap=0, crit=0, lvl=0;
     private static final String TAG = "URL-TAG";
     String[] data = {"Level 0", "Level 1", "Level 2", "Level 3"};
@@ -98,6 +86,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvHP = (TextView) findViewById(R.id.hp_int);
         tvAP = (TextView) findViewById(R.id.ap_int);
         tvCrit = (TextView) findViewById(R.id.crit_int);
+        tvWelcome = (TextView) findViewById(R.id.tvWelcome);
+
         btnAddHP.setOnClickListener(this);
         btnAddAP.setOnClickListener(this);
         btnAddCrit.setOnClickListener(this);
@@ -127,7 +117,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
-
+        Intent intent = getIntent();
+        String login = intent.getStringExtra("login");
+        tvWelcome.setText("Hello, " + login);
     }
 
     @Override
@@ -178,7 +170,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(this, log_activity.class);
                 intent.putExtra("fightlog", logtext);
                 startActivity(intent);
-                //Toast.makeText(this, "Result logs are coming soon...", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btnReset:
                 statsleft=15;
@@ -198,38 +189,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    //private class SentToApi extends AsyncTask<String, String, String> {
     private class SendGlad extends SendToApi {
-        /*@Override
-        protected String doInBackground(String... params) {
-            Log.d(TAG, "Зашли в DoInBg: " + myurl);
-            final String myurl = params[0];
-            try {
-                URL url = new URL(myurl);
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.addRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
-                urlConnection.setReadTimeout(10000);
-                urlConnection.setConnectTimeout(15000);
-                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                StringBuilder result = new StringBuilder();
-                String line;
-                while((line = reader.readLine()) != null) {
-                    result.append(line);
-                }
-                tmp = result.toString();
-                urlConnection.disconnect();
-            } catch (MalformedURLException e) {
-                Log.d(TAG, "MalformedURLException");
-                //e.printStackTrace();
-            } catch (IOException e) {
-                Log.d(TAG, "IOException");
-                tmp = "02No connection to the server...";
-                //e.printStackTrace();
-            }
 
-            return tmp;
-        }*/
         @Override
         protected void onPostExecute(String result) {
             Log.d(TAG, "Зашли в OnPostEx result= " + result);

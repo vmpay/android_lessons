@@ -46,32 +46,9 @@ public class SendToApi extends AsyncTask<String, Void, String> {
             //e.printStackTrace();
         } catch (IOException e) {
             Log.d(TAG, "IOException");
-            tmp = "02No connection to the server...";
+            tmp = "02";// No connection to the server...
             //e.printStackTrace();
         }
         return tmp;
     }
-    /*@Override
-    protected void onPostExecute(String result) {
-        Log.d(TAG, "Зашли в OnPostEx result=" + result);
-
-        String res = tmp.substring(0, 2);
-        logtext = tmp.substring(2);
-        int code = parseInt(res, 10);
-        switch (code){
-            case 0:
-                res = "Defeat!";
-                break;
-            case 1:
-                res = "Victory!";
-                break;
-            default:
-                res = "Unknown code result: "+code;
-                break;
-        }
-
-        tvResult.setText(""+res);
-        tmp = "Empty set in OnPostExecute";
-
-    }*/
 }

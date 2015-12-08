@@ -1,7 +1,6 @@
 package com.example.andrew.gladiatorsimulator;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,17 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import com.example.andrew.gladiatorsimulator.SendToApi;
 
 import static java.lang.Integer.parseInt;
 
@@ -40,10 +28,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     String login ="";
     String password ="";
     String myurl = "";
-    String apiKey = "8651fa249e0541e09bf57da564511763";
     Intent intentMain;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +54,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnForgotPassword.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
 
-        Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);;
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
         image.startAnimation(anim);
-
-
-
     }
 
     @Override
@@ -98,18 +80,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     return;
                 }
                 //TODO: Проверка пароля. Какие символы недопустимы в пароле? Реализовать проверку надежности
-
-                //TODO: Вставить метод отправки логина и пароля на проверку на сервер
-                //TODO: Change URL
                 myurl = "https://gladiator274102.azure-api.net/Gladiator/login?login=" + login + "&password=" + password;
                 Toast.makeText(this, "Waiting for server response...", Toast.LENGTH_SHORT).show();
-                //new SendToApi().execute(myurl);
                 new SendLogin().execute(myurl);
                 break;
             }
             case R.id.button_forgotpassword:
             {
-                //TODO: Вставить код перехода к активити Забыл пароль
                 if (TextUtils.isEmpty(etLogin.getText().toString())) {
                     Log.d(TAG, "Login: " + etLogin.getText().toString());
                     Toast.makeText(this, "E-mail is empty. Fill the field.", Toast.LENGTH_SHORT).show();
@@ -122,8 +99,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(this, "E-mail incorrect format", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                //TODO: Change URL
-                myurl = "https://gladiator274102.azure-api.net/Gladiator/fight?a=5&b=5&c=5&d=0";
+                //TODO: Change URL чето не пахает
+                myurl = "https://gladiator274102.azure-api.net/Gladiator/recallpsw?login=" + login;
                 Toast.makeText(this, "Waiting for server response...", Toast.LENGTH_SHORT).show();
                 new SendToApi().execute(myurl);
                 break;
@@ -131,15 +108,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.button_register:
             {
                 //TODO: Вставить код перехода к активити Регистрация
-
+                Intent intentSignup = new Intent(this, SignUpActivity.class);
+                startActivity(intentSignup);
                 break;
             }
             case R.id.iLogo:
             {
                 //TODO: Не забыть убрать потом этот кейс
                 Log.d(TAG, "iLogo clicked");
-                //Intent intentMain = new Intent(this, MainActivity.class);
-                //intentMain.putExtra("fightlog", logtext);
                 startActivity(intentMain);
                 break;
             }
@@ -152,46 +128,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    //private class SendToApi extends AsyncTask<String, Void, String> {
     private class SendLogin extends SendToApi {
 
-        /*@Override
-        protected String doInBackground(String... params) {
-            Log.d(TAG, "Зашли в DoInBg: " + params[0]);
-            final String myurl = params[0];
-            String tmp="Empty";
-            try {
-                URL url = new URL(myurl);
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.addRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
-                urlConnection.setReadTimeout(10000);
-                urlConnection.setConnectTimeout(15000);
-                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                StringBuilder result = new StringBuilder();
-                String line;
-                while((line = reader.readLine()) != null) {
-                    result.append(line);
-                }
-                tmp = result.toString();
-                urlConnection.disconnect();
-            } catch (MalformedURLException e) {
-                Log.d(TAG, "MalformedURLException");
-                //e.printStackTrace();
-            } catch (IOException e) {
-                Log.d(TAG, "IOException");
-                tmp = "No connection to the server...";
-                //e.printStackTrace();
-            }
-            return tmp;
-        }*/
         @Override
         protected void onPostExecute(String result)
         {
             Log.d(TAG, "Зашли в OnPostEx result=" + result);
-            //TODO: Убрать сабстринг
-            String res = result.substring(0, 2);
-            int code = parseInt(res, 10);
+            //String res = result;
+            int code = parseInt(result, 10);
             switch (code){
                 case 0:// Login failed
                     result = "Incorrect username or password.";
@@ -200,18 +144,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 case 1:// Login succeed
                     intentMain.putExtra("login", login);
                     startActivity(intentMain);
-                    //res = "Victory!";
                     break;
-                case 2:
+                case 2:// Connection error
                     tvMsg.setText("Cannot connect to the server...");
                     break;
-                default:
+                case 3:// Recovery password mail has been sent
+                    tvMsg.setText("Recovery password message has been sent to " + login);
+                    break;
+                case 4:// Recovery password mail hasnt been sent. No such username
+
+                    break;
+                default:// Unknown code
                     Log.d(TAG, "Зашли в OnPostEx Unknown code result: " + code);
                     tvMsg.setText(""+result);
                     break;
             }
-
-
         }
     }
 }
