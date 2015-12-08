@@ -60,10 +60,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        tvMsg.setText("");
         switch (v.getId()) {
             case R.id.button_login:
             {
-                tvMsg.setText("");
                 // Проверяем поля на пустоту и правильность заполнения
                 if (TextUtils.isEmpty(etLogin.getText().toString())
                         || TextUtils.isEmpty(etPassword.getText().toString())) {
@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 //TODO: Change URL чето не пахает
                 myurl = "https://gladiator274102.azure-api.net/Gladiator/recallpsw?login=" + login;
                 Toast.makeText(this, "Waiting for server response...", Toast.LENGTH_SHORT).show();
-                new SendToApi().execute(myurl);
+                new SendLogin().execute(myurl);
                 break;
             }
             case R.id.button_register:
