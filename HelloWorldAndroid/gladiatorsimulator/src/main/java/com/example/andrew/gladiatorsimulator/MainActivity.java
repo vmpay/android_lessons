@@ -1,7 +1,6 @@
 package com.example.andrew.gladiatorsimulator;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,15 +11,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import static java.lang.Integer.parseInt;
 
@@ -37,11 +27,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView tvHP;
     TextView tvAP;
     TextView tvCrit;
+    TextView tvWelcome;
     String tmp = "Empty";
     String logtext = "Empty log";
     String myurl = "";
-    String apiKey = "8651fa249e0541e09bf57da564511763";
-    int statsleft = 15, hp=0, ap=0, crit=0, lvl=0;
+    String login = "admin@admin.com";
+    String res = "";
+    int statsleft = 15, hp=0, ap=0, crit=0, lvl=0, bonusstats=0;
     private static final String TAG = "URL-TAG";
     String[] data = {"Level 0", "Level 1", "Level 2", "Level 3"};
     @Override
@@ -96,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvHP = (TextView) findViewById(R.id.hp_int);
         tvAP = (TextView) findViewById(R.id.ap_int);
         tvCrit = (TextView) findViewById(R.id.crit_int);
+        tvWelcome = (TextView) findViewById(R.id.tvWelcome);
+
         btnAddHP.setOnClickListener(this);
         btnAddAP.setOnClickListener(this);
         btnAddCrit.setOnClickListener(this);
@@ -125,12 +119,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
-
+        Intent intent = getIntent();
+        if (intent.getStringExtra("login")!=null) {
+            login = intent.getStringExtra("login");
+            bonusstats = parseInt(intent.getStringExtra("lvl"), 10);
+            statsleft = statsleft + bonusstats;
+        }
+        tvStatsLeft.setText("" + statsleft);
+        tvWelcome.setText("Hello, " + login);
     }
 
     @Override
     public void onClick(View v) {
         // TODO Auto-generated method stub
+        tvResult.setText("");
         switch (v.getId()){
             case R.id.btnAddHP:
                 if (statsleft>0){
@@ -167,23 +169,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, statsleft + " stat points left. Distribute it.", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                myurl = "https://gladiator274102.azure-api.net/Gladiator/fight?a=" + hp + "&b=" + ap + "&c=" + crit + "&d=" + lvl;
+                myurl = "https://gladiator274102.azure-api.net/Gladiator/fight?login=" + login + "&a=" + hp + "&b=" + ap + "&c=" + crit + "&d=" + lvl;
                 Toast.makeText(this, "Waiting for server response...", Toast.LENGTH_SHORT).show();
-                new SentToApi().execute(myurl);
+                new SendGlad().execute(myurl);
                 break;
             case R.id.btnResult:
+                tvResult.setText(""+res);
                 // TODO: Add logs layout
                 Intent intent = new Intent(this, log_activity.class);
                 intent.putExtra("fightlog", logtext);
                 startActivity(intent);
-                //Toast.makeText(this, "Result logs are coming soon...", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btnReset:
-                statsleft=15;
+                statsleft = 15 + bonusstats;
                 tvStatsLeft.setText(""+statsleft);
-                hp=0;
-                ap=0;
-                crit=0;
+                hp = 0;
+                ap = 0;
+                crit = 0;
                 tvHP.setText(""+hp);
                 tvAP.setText(""+ap);
                 tvCrit.setText(""+crit);
@@ -196,42 +198,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private class SentToApi extends AsyncTask<String, String, String> {
-        @Override
-        protected String doInBackground(String... params) {
-            Log.d(TAG, "Зашли в DoInBg: " + myurl);
-            final String myurl = params[0];
-            try {
-                URL url = new URL(myurl);
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.addRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
-                urlConnection.setReadTimeout(10000);
-                urlConnection.setConnectTimeout(15000);
-                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                StringBuilder result = new StringBuilder();
-                String line;
-                while((line = reader.readLine()) != null) {
-                    result.append(line);
-                }
-                tmp = result.toString();
-                urlConnection.disconnect();
-            } catch (MalformedURLException e) {
-                Log.d(TAG, "MalformedURLException");
-                //e.printStackTrace();
-            } catch (IOException e) {
-                Log.d(TAG, "IOException");
-                tmp = "No connection to the server...";
-                //e.printStackTrace();
-            }
+    private class SendGlad extends SendToApi {
 
-            return tmp;
-        }
         @Override
         protected void onPostExecute(String result) {
-            Log.d(TAG, "Зашли в OnPostEx " + tmp);
-            String res = tmp.substring(0, 2);
-            logtext = tmp.substring(2);
+            Log.d(TAG, "Зашли в OnPostEx result= " + result);
+            res = result.substring(0, 2);
+            logtext = result.substring(2);
             int code = parseInt(res, 10);
             switch (code){
                 case 0:
@@ -239,6 +212,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 case 1:
                     res = "Victory!";
+                    break;
+                case 2:
+                    res = "Cannot connect to the server...";
+                    break;
+                case 32:
+                    res = "Table not found.";
+                    break;
+                case 33:
+                    res = "Something goes wrong  - Empty code.";
+                    break;
+                case 34:
+                    res = "Authentification failed. Check Primary & Secondary keys.";
+                    break;
+                case 35:
+                    res = "Send mail error.";
                     break;
                 default:
                     res = "Unknown code result: "+code;
