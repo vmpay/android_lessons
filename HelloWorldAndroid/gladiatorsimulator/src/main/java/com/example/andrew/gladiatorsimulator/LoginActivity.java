@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         image = (ImageView) findViewById(R.id.iLogo);
         image.setClickable(true);
-        image.setOnClickListener(this);
+        //image.setOnClickListener(this);
 
         btnLogin = (Button) findViewById(R.id.button_login);
         btnForgotPassword = (Button) findViewById(R.id.button_forgotpassword);
@@ -134,25 +134,39 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         protected void onPostExecute(String result)
         {
             Log.d(TAG, "Зашли в OnPostEx result=" + result);
-            //String res = result;
-            int code = parseInt(result, 10);
+            String res = result.substring(0, 2);
+            String lvlstr = result.substring(2);
+            int code = parseInt(res, 10);
+            //int lvl = parseInt(lvlstr, 10);
             switch (code){
-                case 0:// Login failed
-                    result = "Incorrect username or password.";
-                    tvMsg.setText(""+result);
-                    break;
-                case 1:// Login succeed
-                    intentMain.putExtra("login", login);
-                    startActivity(intentMain);
-                    break;
                 case 2:// Connection error
                     tvMsg.setText("Cannot connect to the server...");
                     break;
-                case 3:// Recovery password mail has been sent
-                    tvMsg.setText("Recovery password message has been sent to " + login);
+                case 12:// Login succeed
+                    intentMain.putExtra("login", login);
+                    intentMain.putExtra("lvl", lvlstr);
+                    startActivity(intentMain);
                     break;
-                case 4:// Recovery password mail hasnt been sent. No such username
-
+                case 14:
+                    tvMsg.setText("Entity can't be retreived.");
+                    break;
+                case 15:
+                    tvMsg.setText("Incorrect password.");
+                    break;
+                case 16:
+                    tvMsg.setText("Recovery password mail has been sent to you.");
+                    break;
+                case 32:
+                    tvMsg.setText("Table not found.");
+                    break;
+                case 33:
+                    tvMsg.setText("Something goes wrong  - Empty code.");
+                    break;
+                case 34:
+                    tvMsg.setText("Authentification failed. Check Primary & Secondary keys.");
+                    break;
+                case 35:
+                    tvMsg.setText("Send mail error.");
                     break;
                 default:// Unknown code
                     Log.d(TAG, "Зашли в OnPostEx Unknown code result: " + code);

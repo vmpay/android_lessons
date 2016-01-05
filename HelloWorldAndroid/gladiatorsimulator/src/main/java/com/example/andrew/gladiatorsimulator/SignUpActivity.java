@@ -81,14 +81,26 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             Log.d(TAG, "Зашли в OnPostEx result=" + result);
             int code = parseInt(result, 10);
             switch (code){
-                case 0:// Registration complete
+                case 10:// Registration complete
                     tvMsg.setText("Your registration is completed. Turn back and sign in.");
                     break;
-                case 1:// Registration failed
+                case 11:// Registration failed
                     tvMsg.setText("The login is already in use. Try another one.");
                     break;
                 case 2:// Connecting error
                     tvMsg.setText("Cannot connect to the server...");
+                    break;
+                case 32:
+                    tvMsg.setText("Table not found.");
+                    break;
+                case 33:
+                    tvMsg.setText("Something goes wrong  - Empty code.");
+                    break;
+                case 34:
+                    tvMsg.setText("Authentification failed. Check Primary & Secondary keys.");
+                    break;
+                case 35:
+                    tvMsg.setText("Send mail error.");
                     break;
                 default:// Unknown code
                     Log.d(TAG, "Зашли в OnPostEx Unknown code result: " + code);
