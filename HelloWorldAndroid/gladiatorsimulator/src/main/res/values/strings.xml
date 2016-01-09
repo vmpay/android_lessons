@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GladiatorSimulator</string>
+    <string name="app_name">GladiatorSimulator v0.2</string>
     <string name="login_text">Sign in</string>
     <string name="forgotpassword_text">Forgot password</string>
     <string name="register_text">Sign up</string>

@@ -212,6 +212,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 case 1:
                     res = "Victory!";
+                    statsleft = 1;
+                    tvStatsLeft.setText("" + statsleft);
                     break;
                 case 2:
                     res = "Cannot connect to the server...";
