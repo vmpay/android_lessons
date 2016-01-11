@@ -12,14 +12,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static java.lang.Integer.parseInt;
-
-/**
- * Created by Andrew on 07.12.2015.
- */
-public class SendToApi extends AsyncTask<String, Void, String> {
+class SendToApi extends AsyncTask<String, Void, String> {
     private static final String TAG = "SendToApiClass";
-    String apiKey = "8651fa249e0541e09bf57da564511763";
     String tmp="Empty";
 
     @Override
@@ -29,6 +23,7 @@ public class SendToApi extends AsyncTask<String, Void, String> {
         try {
             URL url = new URL(myurl);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            String apiKey = "8651fa249e0541e09bf57da564511763";
             urlConnection.addRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
             urlConnection.setReadTimeout(10000);
             urlConnection.setConnectTimeout(15000);

@@ -17,18 +17,12 @@ import android.widget.Toast;
 import static java.lang.Integer.parseInt;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    ImageView image;
-    EditText etLogin;
-    EditText etPassword;
-    Button btnLogin;
-    Button btnForgotPassword;
-    Button btnRegister;
-    TextView tvMsg;
+    private EditText etLogin;
+    private EditText etPassword;
+    private TextView tvMsg;
     private static final String TAG = "LoginActivity";
-    String login ="";
-    String password ="";
-    String myurl = "";
-    Intent intentMain;
+    private String login ="";
+    private Intent intentMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +34,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         etLogin = (EditText) findViewById(R.id.etLogin);
         etPassword = (EditText) findViewById(R.id.etPassword);
 
-        image = (ImageView) findViewById(R.id.iLogo);
+        ImageView image = (ImageView) findViewById(R.id.iLogo);
         image.setClickable(true);
         //image.setOnClickListener(this);
 
-        btnLogin = (Button) findViewById(R.id.button_login);
-        btnForgotPassword = (Button) findViewById(R.id.button_forgotpassword);
-        btnRegister = (Button) findViewById(R.id.button_register);
+        Button btnLogin = (Button) findViewById(R.id.button_login);
+        Button btnForgotPassword = (Button) findViewById(R.id.button_forgotpassword);
+        Button btnRegister = (Button) findViewById(R.id.button_register);
 
         tvMsg = (TextView) findViewById(R.id.tvMessage);
 
@@ -63,6 +57,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         tvMsg.setText("");
         switch (v.getId()) {
             case R.id.button_login:
+                String myurl = "";
             {
                 // Проверяем поля на пустоту и правильность заполнения
                 if (TextUtils.isEmpty(etLogin.getText().toString())
@@ -72,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     return;
                 }
                 login = etLogin.getText().toString();
-                password = etPassword.getText().toString();
+                String password = etPassword.getText().toString();
                 if (!android.util.Patterns.EMAIL_ADDRESS.matcher(login).matches())
                 {
                     Log.d(TAG, "email = " + login);

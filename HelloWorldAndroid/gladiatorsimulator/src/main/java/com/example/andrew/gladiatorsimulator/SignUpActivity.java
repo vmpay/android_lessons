@@ -13,16 +13,11 @@ import android.widget.Toast;
 import static java.lang.Integer.parseInt;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener{
-    EditText etLogin;
-    EditText etPassword;
-    EditText etRePassword;
-    Button btnRSignup;
-    TextView tvMsg;
+    private EditText etLogin;
+    private EditText etPassword;
+    private EditText etRePassword;
+    private TextView tvMsg;
     private static final String TAG = "SignUpActivity";
-    String login;
-    String password;
-    String repassword;
-    String myurl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +28,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         etPassword = (EditText) findViewById(R.id.etPassword);
         etRePassword = (EditText) findViewById(R.id.etRePassword);
 
-        btnRSignup = (Button) findViewById(R.id.button_register);
+        Button btnRSignup = (Button) findViewById(R.id.button_register);
 
         tvMsg = (TextView) findViewById(R.id.tvMessage);
 
@@ -52,9 +47,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(this, "No input data. Fill the fields.", Toast.LENGTH_SHORT).show();
             return;
         }
-        login = etLogin.getText().toString();
-        password = etPassword.getText().toString();
-        repassword = etRePassword.getText().toString();
+        String login = etLogin.getText().toString();
+        String password = etPassword.getText().toString();
+        String repassword = etRePassword.getText().toString();
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(login).matches())
         {
             Log.d(TAG, "email = " + login);
@@ -68,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
         //TODO: Проверка пароля. Какие символы недопустимы в пароле? Реализовать проверку надежности
-        myurl = "https://gladiator274102.azure-api.net/Gladiator/signup?login=" + login + "&password=" + password;
+        String myurl = "https://gladiator274102.azure-api.net/Gladiator/signup?login=" + login + "&password=" + password;
         Toast.makeText(this, "Waiting for server response...", Toast.LENGTH_SHORT).show();
         new SendSignup().execute(myurl);
     }

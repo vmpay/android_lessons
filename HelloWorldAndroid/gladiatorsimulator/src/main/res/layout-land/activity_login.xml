@@ -13,8 +13,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/iLogo"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/logo"/>
+            android:layout_marginTop="10dp"
+            android:src="@drawable/logo"
+            android:contentDescription="@string/logoimg"/>
         <TextView
             android:id="@+id/tvLogin"
             android:layout_width="wrap_content"

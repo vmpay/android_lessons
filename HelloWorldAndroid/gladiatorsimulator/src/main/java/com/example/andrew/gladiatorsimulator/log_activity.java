@@ -6,18 +6,17 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class log_activity extends AppCompatActivity {
-    TextView tvView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_activity);
-        tvView = (TextView) findViewById(R.id.tvView);
+        TextView tvView = (TextView) findViewById(R.id.tvView);
 
         Intent intent = getIntent();
 
         String fightlog = intent.getStringExtra("fightlog");
         fightlog = fightlog.replaceAll("NL", System.getProperty("line.separator"));
-        tvView.setText("" + fightlog );
+        tvView.setText("" + fightlog);
     }
 }

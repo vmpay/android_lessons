@@ -16,79 +16,40 @@ import static java.lang.Integer.parseInt;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnAddHP;
-    Button btnAddAP;
-    Button btnAddCrit;
-    Button btnFight;
-    Button btnResult;
-    Button btnReset;
-    TextView tvResult;
-    TextView tvStatsLeft;
-    TextView tvHP;
-    TextView tvAP;
-    TextView tvCrit;
-    TextView tvWelcome;
-    String tmp = "Empty";
-    String logtext = "Empty log";
-    String myurl = "";
-    String login = "admin@admin.com";
-    String res = "";
-    int statsleft = 15, hp=0, ap=0, crit=0, lvl=0, bonusstats=0;
+    private TextView tvResult;
+    private TextView tvStatsLeft;
+    private TextView tvHP;
+    private TextView tvAP;
+    private TextView tvCrit;
+    private String logtext = "Empty log";
+    private String login = "admin@admin.com";
+    private String res = "";
+    private int statsleft = 15;
+    private int hp=0;
+    private int ap=0;
+    private int crit=0;
+    private int lvl=0;
+    private int bonusstats=0;
     private static final String TAG = "URL-TAG";
-    String[] data = {"Level 0", "Level 1", "Level 2", "Level 3"};
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        //Log.d(TAG, "MainActivity: onRestart() ");
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //Log.d(TAG, "MainActivity: onStart()");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //Log.d(TAG, "MainActivity: onResume()");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //Log.d(TAG, "MainActivity: onPause()");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        //Log.d(TAG, "MainActivity: onStop()");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //Log.d(TAG, "MainActivity: onDestroy()");
-    }
+    private final String[] data = {"Level 0", "Level 1", "Level 2", "Level 3"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnAddHP = (Button) findViewById(R.id.btnAddHP);
-        btnAddAP = (Button) findViewById(R.id.btnAddAP);
-        btnAddCrit = (Button) findViewById(R.id.btnAddCrit);
-        btnFight = (Button) findViewById(R.id.btnFight);
-        btnResult = (Button) findViewById(R.id.btnResult);
-        btnReset = (Button) findViewById(R.id.btnReset);
+        Button btnAddHP = (Button) findViewById(R.id.btnAddHP);
+        Button btnAddAP = (Button) findViewById(R.id.btnAddAP);
+        Button btnAddCrit = (Button) findViewById(R.id.btnAddCrit);
+        Button btnFight = (Button) findViewById(R.id.btnFight);
+        Button btnResult = (Button) findViewById(R.id.btnResult);
+        Button btnReset = (Button) findViewById(R.id.btnReset);
 
         tvResult = (TextView) findViewById(R.id.tvResult);
         tvStatsLeft = (TextView) findViewById(R.id.statsleft_int);
         tvHP = (TextView) findViewById(R.id.hp_int);
         tvAP = (TextView) findViewById(R.id.ap_int);
         tvCrit = (TextView) findViewById(R.id.crit_int);
-        tvWelcome = (TextView) findViewById(R.id.tvWelcome);
+        TextView tvWelcome = (TextView) findViewById(R.id.tvWelcome);
 
         btnAddHP.setOnClickListener(this);
         btnAddAP.setOnClickListener(this);
@@ -169,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, statsleft + " stat points left. Distribute it.", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                myurl = "https://gladiator274102.azure-api.net/Gladiator/fight?login=" + login + "&a=" + hp + "&b=" + ap + "&c=" + crit + "&d=" + lvl;
+                String myurl = "https://gladiator274102.azure-api.net/Gladiator/fight?login=" + login + "&a=" + hp + "&b=" + ap + "&c=" + crit + "&d=" + lvl;
                 Toast.makeText(this, "Waiting for server response...", Toast.LENGTH_SHORT).show();
                 new SendGlad().execute(myurl);
                 break;
@@ -189,8 +150,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tvHP.setText(""+hp);
                 tvAP.setText(""+ap);
                 tvCrit.setText(""+crit);
-                tmp="Stats have been resetted";
-                tvResult.setText(""+tmp);
+                String tmp = "Stats have been resetted";
+                tvResult.setText(""+ tmp);
                 break;
             default:
                 Log.d(TAG, "Unexpected switch exit");
@@ -212,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 case 1:
                     res = "Victory!";
+                    bonusstats += 1;
                     statsleft = 1;
                     tvStatsLeft.setText("" + statsleft);
                     break;
