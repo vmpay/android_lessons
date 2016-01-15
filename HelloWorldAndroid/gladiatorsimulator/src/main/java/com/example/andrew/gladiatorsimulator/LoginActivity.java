@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import static java.lang.Integer.parseInt;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -23,13 +24,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final String TAG = "LoginActivity";
     private String login ="";
     private Intent intentMain;
+    private Intent intentSignup;
+    private Button btnLogin;
+    private Button btnForgotPassword;
+    private Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         intentMain  = new Intent(this, MainActivity.class);
-
+        intentSignup = new Intent(this, SignUpActivity.class);
 
         etLogin = (EditText) findViewById(R.id.etLogin);
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -38,9 +43,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         image.setClickable(true);
         //image.setOnClickListener(this);
 
-        Button btnLogin = (Button) findViewById(R.id.button_login);
-        Button btnForgotPassword = (Button) findViewById(R.id.button_forgotpassword);
-        Button btnRegister = (Button) findViewById(R.id.button_register);
+        btnLogin = (Button) findViewById(R.id.button_login);
+        btnForgotPassword = (Button) findViewById(R.id.button_forgotpassword);
+        btnRegister = (Button) findViewById(R.id.button_register);
 
         tvMsg = (TextView) findViewById(R.id.tvMessage);
 
@@ -55,6 +60,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         tvMsg.setText("");
+        HideSoftKeyboard a = new HideSoftKeyboard();
+        a.hideSoftKeyboard(this);
         switch (v.getId()) {
             case R.id.button_login:
                 String myurl = "";
@@ -77,6 +84,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 //TODO: Проверка пароля. Какие символы недопустимы в пароле? Реализовать проверку надежности
                 myurl = "https://gladiator274102.azure-api.net/Gladiator/login?login=" + login + "&password=" + password;
                 Toast.makeText(this, "Waiting for server response...", Toast.LENGTH_SHORT).show();
+                btnLogin.setEnabled(false);
+                btnForgotPassword.setEnabled(false);
+                btnRegister.setEnabled(false);
                 new SendLogin().execute(myurl);
                 break;
             }
@@ -97,13 +107,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 //TODO: Change URL чето не пахает
                 myurl = "https://gladiator274102.azure-api.net/Gladiator/recallpsw?login=" + login;
                 Toast.makeText(this, "Waiting for server response...", Toast.LENGTH_SHORT).show();
+                btnLogin.setEnabled(false);
+                btnForgotPassword.setEnabled(false);
+                btnRegister.setEnabled(false);
                 new SendLogin().execute(myurl);
                 break;
             }
             case R.id.button_register:
             {
                 //TODO: Вставить код перехода к активити Регистрация
-                Intent intentSignup = new Intent(this, SignUpActivity.class);
                 startActivity(intentSignup);
                 break;
             }
@@ -168,6 +180,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     tvMsg.setText(""+result);
                     break;
             }
+            btnLogin.setEnabled(true);
+            btnForgotPassword.setEnabled(true);
+            btnRegister.setEnabled(true);
         }
     }
 }

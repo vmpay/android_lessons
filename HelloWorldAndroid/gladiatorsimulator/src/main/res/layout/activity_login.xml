@@ -4,14 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/iLogo"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/logo"
-        android:contentDescription="@string/logoimg"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,6 +12,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iLogo"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/logo"
+                android:contentDescription="@string/logoimg"/>
             <TextView
         android:id="@+id/tvLogin"
         android:layout_width="wrap_content"
@@ -83,46 +83,28 @@
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="2"
-            android:gravity="bottom"
-            android:orientation="horizontal">
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="1"
-            android:gravity="bottom"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button
                 android:id="@+id/button_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
                 android:layout_weight="1"
-                android:text="@string/login_text" />
-
+                android:text="@string/login_text"
+                style="?android:attr/buttonBarButtonStyle"/>
             <Button
                 android:id="@+id/button_forgotpassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
                 android:layout_weight="1"
-                android:text="@string/forgotpassword_text" />
+                android:text="@string/forgotpassword_text"
+                style="?android:attr/buttonBarButtonStyle"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="1"
-            android:gravity="bottom"
-            android:orientation="horizontal">
             <Button
                 android:id="@+id/button_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:text="@string/register_text" />
-        </LinearLayout>
+                android:text="@string/register_text"
+                style="?android:attr/buttonBarButtonStyle"/>
     </LinearLayout>
 </LinearLayout>

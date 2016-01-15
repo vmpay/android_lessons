@@ -12,11 +12,15 @@ public class log_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_activity);
         TextView tvView = (TextView) findViewById(R.id.tvView);
+        TextView tvResult = (TextView) findViewById(R.id.tvLogResult);
 
         Intent intent = getIntent();
 
         String fightlog = intent.getStringExtra("fightlog");
-        fightlog = fightlog.replaceAll("NL", System.getProperty("line.separator"));
+        String fightresult = intent.getStringExtra("result");
+        //fightlog = fightlog.replaceAll("NL", System.getProperty("line.separator"));
+        fightlog = fightlog.replaceAll("NL", "\n");
+        tvResult.setText("" + fightresult);
         tvView.setText("" + fightlog);
     }
 }

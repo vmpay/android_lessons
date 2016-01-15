@@ -17,6 +17,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private EditText etPassword;
     private EditText etRePassword;
     private TextView tvMsg;
+    private Button btnRSignup;
     private static final String TAG = "SignUpActivity";
 
     @Override
@@ -28,7 +29,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         etPassword = (EditText) findViewById(R.id.etPassword);
         etRePassword = (EditText) findViewById(R.id.etRePassword);
 
-        Button btnRSignup = (Button) findViewById(R.id.button_register);
+        btnRSignup = (Button) findViewById(R.id.button_register);
 
         tvMsg = (TextView) findViewById(R.id.tvMessage);
 
@@ -39,6 +40,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         tvMsg.setText("");
+        HideSoftKeyboard a = new HideSoftKeyboard();
+        a.hideSoftKeyboard(this);
         // Проверяем поля на пустоту и правильность заполнения
         if (TextUtils.isEmpty(etLogin.getText().toString())
                 || TextUtils.isEmpty(etPassword.getText().toString())
@@ -65,6 +68,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         //TODO: Проверка пароля. Какие символы недопустимы в пароле? Реализовать проверку надежности
         String myurl = "https://gladiator274102.azure-api.net/Gladiator/signup?login=" + login + "&password=" + password;
         Toast.makeText(this, "Waiting for server response...", Toast.LENGTH_SHORT).show();
+        btnRSignup.setEnabled(false);
         new SendSignup().execute(myurl);
     }
 
@@ -102,6 +106,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     tvMsg.setText(""+result);
                     break;
             }
+            btnRSignup.setEnabled(true);
         }
     }
 }

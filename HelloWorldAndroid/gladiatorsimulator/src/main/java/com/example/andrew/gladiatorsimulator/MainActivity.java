@@ -16,6 +16,9 @@ import static java.lang.Integer.parseInt;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private Button btnFight;
+    private Button btnResult;
+    private Button btnReset;
     private TextView tvResult;
     private TextView tvStatsLeft;
     private TextView tvHP;
@@ -23,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvCrit;
     private String logtext = "Empty log";
     private String login = "admin@admin.com";
-    private String res = "";
+    private String res = "Empty result";
     private int statsleft = 15;
     private int hp=0;
     private int ap=0;
@@ -32,17 +35,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int bonusstats=0;
     private static final String TAG = "URL-TAG";
     private final String[] data = {"Level 0", "Level 1", "Level 2", "Level 3"};
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        intent = new Intent(this, log_activity.class);
+
         Button btnAddHP = (Button) findViewById(R.id.btnAddHP);
         Button btnAddAP = (Button) findViewById(R.id.btnAddAP);
         Button btnAddCrit = (Button) findViewById(R.id.btnAddCrit);
-        Button btnFight = (Button) findViewById(R.id.btnFight);
-        Button btnResult = (Button) findViewById(R.id.btnResult);
-        Button btnReset = (Button) findViewById(R.id.btnReset);
+        btnFight = (Button) findViewById(R.id.btnFight);
+        btnResult = (Button) findViewById(R.id.btnResult);
+        btnReset = (Button) findViewById(R.id.btnReset);
 
         tvResult = (TextView) findViewById(R.id.tvResult);
         tvStatsLeft = (TextView) findViewById(R.id.statsleft_int);
@@ -80,12 +86,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
-        Intent intent = getIntent();
-        if (intent.getStringExtra("login")!=null) {
-            login = intent.getStringExtra("login");
-            bonusstats = parseInt(intent.getStringExtra("lvl"), 10);
+
+        Intent intentinput = getIntent();
+        if (intentinput.getStringExtra("login")!=null) {
+            login = intentinput.getStringExtra("login");
+            bonusstats = parseInt(intentinput.getStringExtra("lvl"), 10);
             statsleft = statsleft + bonusstats;
         }
+        
         tvStatsLeft.setText("" + statsleft);
         tvWelcome.setText("Hello, " + login);
     }
@@ -132,13 +140,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 String myurl = "https://gladiator274102.azure-api.net/Gladiator/fight?login=" + login + "&a=" + hp + "&b=" + ap + "&c=" + crit + "&d=" + lvl;
                 Toast.makeText(this, "Waiting for server response...", Toast.LENGTH_SHORT).show();
+                btnFight.setEnabled(false);
+                btnReset.setEnabled(false);
+                btnResult.setEnabled(false);
                 new SendGlad().execute(myurl);
                 break;
             case R.id.btnResult:
-                tvResult.setText(""+res);
+                tvResult.setText("" + res);
                 // TODO: Add logs layout
-                Intent intent = new Intent(this, log_activity.class);
                 intent.putExtra("fightlog", logtext);
+                intent.putExtra("result", res);
                 startActivity(intent);
                 break;
             case R.id.btnReset:
@@ -170,9 +181,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             switch (code){
                 case 0:
                     res = "Defeat!";
+                    intent.putExtra("fightlog", logtext);
+                    intent.putExtra("result", res);
+                    startActivity(intent);
                     break;
                 case 1:
                     res = "Victory!";
+                    intent.putExtra("fightlog", logtext);
+                    intent.putExtra("result", res);
+                    startActivity(intent);
                     bonusstats += 1;
                     statsleft = 1;
                     tvStatsLeft.setText("" + statsleft);
@@ -196,7 +213,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     res = "Unknown code result: "+code;
                     break;
             }
-
+            btnFight.setEnabled(true);
+            btnReset.setEnabled(true);
+            btnResult.setEnabled(true);
             tvResult.setText(""+res);
             tmp = "Empty set in OnPostExecute";
 
