@@ -3,6 +3,8 @@ package com.example.andrew.gladiatorsimulator;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 public class log_activity extends AppCompatActivity {
@@ -22,5 +24,8 @@ public class log_activity extends AppCompatActivity {
         fightlog = fightlog.replaceAll("NL", "\n");
         tvResult.setText("" + fightresult);
         tvView.setText("" + fightlog);
+        Animation anim = null;
+        anim = AnimationUtils.loadAnimation(this, R.anim.animresult);
+        tvResult.startAnimation(anim);
     }
 }
