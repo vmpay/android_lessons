@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "URL-TAG";
     private final String[] data = {"Level 0", "Level 1", "Level 2", "Level 3"};
     private Intent intent;
+    private final String link = "api";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, statsleft + " stat points left. Distribute it.", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                String myurl = "https://gladiator274102.azure-api.net/Gladiator/fight?login=" + login + "&a=" + hp + "&b=" + ap + "&c=" + crit + "&d=" + lvl;
+                String myurl = link + "/fight?login=" + login + "&a=" + hp + "&b=" + ap + "&c=" + crit + "&d=" + lvl;
                 Toast.makeText(this, "Waiting for server response...", Toast.LENGTH_SHORT).show();
                 btnFight.setEnabled(false);
                 btnReset.setEnabled(false);

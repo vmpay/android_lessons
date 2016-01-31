@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button btnLogin;
     private Button btnForgotPassword;
     private Button btnRegister;
+    private final String link = "api";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +82,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(this, "E-mail incorrect format", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                //TODO: Проверка пароля. Какие символы недопустимы в пароле? Реализовать проверку надежности
-                myurl = "https://gladiator274102.azure-api.net/Gladiator/login?login=" + login + "&password=" + password;
+                myurl = link + "/login?login=" + login + "&password=" + password;
                 Toast.makeText(this, "Waiting for server response...", Toast.LENGTH_SHORT).show();
                 btnLogin.setEnabled(false);
                 btnForgotPassword.setEnabled(false);
@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     return;
                 }
                 //TODO: Change URL чето не пахает
-                myurl = "https://gladiator274102.azure-api.net/Gladiator/recallpsw?login=" + login;
+                myurl = link + "/recallpsw?login=" + login;
                 Toast.makeText(this, "Waiting for server response...", Toast.LENGTH_SHORT).show();
                 btnLogin.setEnabled(false);
                 btnForgotPassword.setEnabled(false);
@@ -131,7 +131,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.d(TAG, "Default exit from switch Onclick");
                 break;
             }
-
         }
     }
 
@@ -144,7 +143,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             String res = result.substring(0, 2);
             String lvlstr = result.substring(2);
             int code = parseInt(res, 10);
-            //int lvl = parseInt(lvlstr, 10);
             switch (code){
                 case 2:// Connection error
                     tvMsg.setText("Cannot connect to the server...");

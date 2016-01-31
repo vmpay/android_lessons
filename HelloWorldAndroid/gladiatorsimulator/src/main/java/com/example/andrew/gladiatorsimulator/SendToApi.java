@@ -23,8 +23,8 @@ class SendToApi extends AsyncTask<String, Void, String> {
         try {
             URL url = new URL(myurl);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            String apiKey = "8651fa249e0541e09bf57da564511763";
-            urlConnection.addRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
+            //String apiKey = "My-Ocp-Apim-Subscription-Key";
+            //urlConnection.addRequestProperty("Ocp-Apim-Subscription-Key", apiKey);
             urlConnection.setReadTimeout(10000);
             urlConnection.setConnectTimeout(15000);
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());

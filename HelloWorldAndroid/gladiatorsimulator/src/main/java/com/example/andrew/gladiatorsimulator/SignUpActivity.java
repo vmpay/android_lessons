@@ -19,6 +19,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private TextView tvMsg;
     private Button btnRSignup;
     private static final String TAG = "SignUpActivity";
+    private final String link = "api";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +66,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(this, "Passwords are not the same.", Toast.LENGTH_SHORT).show();
             return;
         }
-        //TODO: Проверка пароля. Какие символы недопустимы в пароле? Реализовать проверку надежности
-        String myurl = "https://gladiator274102.azure-api.net/Gladiator/signup?login=" + login + "&password=" + password;
+        String myurl = link + "/signup?login=" + login + "&password=" + password;
         Toast.makeText(this, "Waiting for server response...", Toast.LENGTH_SHORT).show();
         btnRSignup.setEnabled(false);
         new SendSignup().execute(myurl);

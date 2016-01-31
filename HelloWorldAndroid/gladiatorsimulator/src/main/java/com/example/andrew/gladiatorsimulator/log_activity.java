@@ -20,7 +20,6 @@ public class log_activity extends AppCompatActivity {
 
         String fightlog = intent.getStringExtra("fightlog");
         String fightresult = intent.getStringExtra("result");
-        //fightlog = fightlog.replaceAll("NL", System.getProperty("line.separator"));
         fightlog = fightlog.replaceAll("NL", "\n");
         tvResult.setText("" + fightresult);
         tvView.setText("" + fightlog);
