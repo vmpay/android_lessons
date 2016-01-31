@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
-
         Intent intentinput = getIntent();
         if (intentinput.getStringExtra("login")!=null) {
             login = intentinput.getStringExtra("login");
@@ -99,9 +98,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvWelcome.setText("Hello, " + login);
     }
 
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        statsleft = savedInstanceState.getInt("statsleft");
+        hp = savedInstanceState.getInt("hp");
+        ap = savedInstanceState.getInt("ap");
+        crit = savedInstanceState.getInt("crit");
+        tvStatsLeft.setText("" + statsleft);
+        tvHP.setText("" + hp);
+        tvAP.setText("" + ap);
+        tvCrit.setText("" + crit);
+    }
+
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("statsleft", statsleft);
+        outState.putInt("hp", hp);
+        outState.putInt("ap", ap);
+        outState.putInt("crit", crit);
+    }
+
     @Override
     public void onClick(View v) {
-        // TODO Auto-generated method stub
         tvResult.setText("");
         switch (v.getId()){
             case R.id.btnAddHP:
