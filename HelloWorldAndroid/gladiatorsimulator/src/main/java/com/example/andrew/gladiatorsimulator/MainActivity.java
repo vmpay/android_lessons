@@ -1,6 +1,7 @@
 package com.example.andrew.gladiatorsimulator;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,8 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int crit=0;
     private int lvl=0;
     private int bonusstats=0;
+    private int i=0;
     private static final String TAG = "URL-TAG";
-    private final String[] data = {"Level 0", "Level 1", "Level 2", "Level 3"};
+    private final String[] data = {"Level 0", "Level 1", "Level 2", "Level 3", "pvp"};
     private Intent intent;
     private final String link = "api";
 
@@ -81,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // записываем позицию нажатого элемента
+                Log.d(TAG, "lvl = " + position);
                 lvl = position;
             }
             @Override
@@ -157,7 +160,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, statsleft + " stat points left. Distribute it.", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                String myurl = link + "/fight?login=" + login + "&a=" + hp + "&b=" + ap + "&c=" + crit + "&d=" + lvl;
+                String myurl;
+                if (lvl==4)
+                    myurl = link + "/fightpvp?login=" + login + "&a=" + hp + "&b=" + ap + "&c=" + crit;
+                else
+                    myurl = link + "/fight?login=" + login + "&a=" + hp + "&b=" + ap + "&c=" + crit + "&d=" + lvl;
                 Toast.makeText(this, "Waiting for server response...", Toast.LENGTH_SHORT).show();
                 btnFight.setEnabled(false);
                 btnReset.setEnabled(false);
@@ -216,6 +223,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case 2:
                     res = "Cannot connect to the server...";
                     break;
+                case 3:
+                    //TODO: waiting for opponents
+                    Log.d(TAG, "Waiting for other players");
+                    res = "Looking for opponents";
+                    if (i>2)
+                    {
+                        res = "There is no opponents to fight";
+                        break;
+                    }
+                    i++;
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            // Actions to do after 10 seconds
+                            String myurl = link + "/fightpvp?login=" + login;
+                            //Toast.makeText(this, "Waiting for server response...", Toast.LENGTH_SHORT).show();
+                            new SendGlad().execute(myurl);
+                        }
+                    }, 10000);
+                    break;
                 case 32:
                     res = "Table not found.";
                     break;
@@ -232,9 +259,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     res = "Unknown code result: "+code;
                     break;
             }
-            btnFight.setEnabled(true);
-            btnReset.setEnabled(true);
-            btnResult.setEnabled(true);
+            if (res!="Looking for opponents")
+            {
+                btnFight.setEnabled(true);
+                btnReset.setEnabled(true);
+                btnResult.setEnabled(true);
+            }
             tvResult.setText(""+res);
             tmp = "Empty set in OnPostExecute";
 

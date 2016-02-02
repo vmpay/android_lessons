@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HelloWorldAndroid.iml" filepath="$PROJECT_DIR$/HelloWorldAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/gladiatorsimulator/gladiatorsimulator.iml" filepath="$PROJECT_DIR$/gladiatorsimulator/gladiatorsimulator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p1251_viewpager/p1251_viewpager.iml" filepath="$PROJECT_DIR$/p1251_viewpager/p1251_viewpager.iml" />
     </modules>
   </component>
 </project>

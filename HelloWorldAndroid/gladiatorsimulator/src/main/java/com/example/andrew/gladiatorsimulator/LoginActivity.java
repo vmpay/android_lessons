@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         ImageView image = (ImageView) findViewById(R.id.iLogo);
         image.setClickable(true);
-        image.setOnClickListener(this);
+        //image.setOnClickListener(this);
 
         btnLogin = (Button) findViewById(R.id.button_login);
         btnForgotPassword = (Button) findViewById(R.id.button_forgotpassword);
