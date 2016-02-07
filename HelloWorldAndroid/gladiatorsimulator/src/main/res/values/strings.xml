@@ -8,4 +8,5 @@
     <string name="regform">Registration Form</string>
     <string name="repassword">Reenter the password:</string>
     <string name="logoimg">Logo image</string>
+    <string name="facebook_app_id">189268738095311</string>
 </resources>

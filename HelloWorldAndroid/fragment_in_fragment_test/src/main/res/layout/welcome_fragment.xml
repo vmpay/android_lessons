@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/track_usage_title"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"/>
+
+    <fragment
+        android:name="com.diploma.vmpay.fragment_in_fragment_test.AlertFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/fragmentSP"
+        tools:layout="@layout/alerts_fragment">
+    </fragment>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAddAlert"
+        android:text="@string/addAlertButton"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnClearAlerts"
+        android:text="@string/ClearAlertsButton"/>
+
+</LinearLayout>
