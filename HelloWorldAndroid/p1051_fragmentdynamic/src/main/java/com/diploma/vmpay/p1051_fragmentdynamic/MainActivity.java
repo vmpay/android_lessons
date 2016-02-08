@@ -10,7 +10,7 @@ public class MainActivity extends AppCompatActivity {
 
     Fragment1 frag1;
     Fragment2 frag2;
-    FragmentTransaction fTrans;
+    FragmentTransaction fTrans, ft;
     CheckBox chbStack;
 
     @Override
@@ -20,7 +20,10 @@ public class MainActivity extends AppCompatActivity {
 
         frag1 = new Fragment1();
         frag2 = new Fragment2();
-
+        ft = getFragmentManager().beginTransaction();
+        ft.add(R.id.frgmCont, frag1);
+        ft.addToBackStack(null);
+        ft.commit();
         chbStack = (CheckBox)findViewById(R.id.chbStack);
     }
 
@@ -40,5 +43,16 @@ public class MainActivity extends AppCompatActivity {
         }
         if (chbStack.isChecked()) fTrans.addToBackStack(null);
         fTrans.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 1){
+            getFragmentManager().popBackStackImmediate();
+            getFragmentManager().beginTransaction().commit();
+        } else {
+            //handle finish
+            super.onBackPressed();
+        }
     }
 }

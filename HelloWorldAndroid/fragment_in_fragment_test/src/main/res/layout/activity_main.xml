@@ -10,13 +10,13 @@
     tools:context="com.diploma.vmpay.fragment_in_fragment_test.MainActivity"
     android:orientation="vertical">
 
-    <fragment
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:id="@+id/fragmentMain"
-        android:name="com.diploma.vmpay.fragment_in_fragment_test.Fragment1"
-        tools:layout="@layout/welcome_fragment" />
+        android:id="@+id/fragmentMain"/>
+        <!--android:name="com.diploma.vmpay.fragment_in_fragment_test.Fragment1"
+        tools:layout="@layout/welcome_fragment" />-->
 
     <TextView
         android:layout_width="wrap_content"

@@ -11,20 +11,26 @@
         android:layout_marginTop="25dp"
         android:layout_marginBottom="25dp"/>
 
-    <fragment
-        android:name="com.diploma.vmpay.fragment_in_fragment_test.AlertFragment"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/fragmentSP"
         tools:layout="@layout/alerts_fragment">
-    </fragment>
+        <!--android:name="com.diploma.vmpay.fragment_in_fragment_test.AlertFragment"-->
+    </FrameLayout>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnAddAlert"
         android:text="@string/addAlertButton"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAddSP"
+        android:text="@string/addSP"/>
 
     <Button
         android:layout_width="match_parent"

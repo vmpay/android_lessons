@@ -4,4 +4,6 @@
     <string name="track_usage_title">Track Usage</string>
     <string name="emptyTV">No sharedPreferences found</string>
     <string name="ClearAlertsButton">Delete Alerts</string>
+    <string name="btnOK">OK</string>
+    <string name="addSP">Add SP</string>
 </resources>

@@ -31,19 +31,13 @@ public class AlertFragment extends Fragment {
 
         if(!savedText.isEmpty())
         {
-            Log.d(LOG_TAG, "onCreateView() AlertFragment: before linearLayout");
             LinearLayout linLayout = (LinearLayout) v.findViewById(R.id.alertLayout);
             LayoutInflater ltInflater = getActivity().getLayoutInflater();
             View item = ltInflater.inflate(R.layout.item, linLayout, false);
             TextView tvName = (TextView) item.findViewById(R.id.tvAlert);
-            Log.d(LOG_TAG, "onCreateView() AlertFragment:Before setText");
             tvName.setText(savedText);
-            Log.d(LOG_TAG, "onCreateView() AlertFragment: before getLayoutParams");
             item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
-            Log.d(LOG_TAG, "onCreateView() AlertFragment: before addView");
             linLayout.addView(item);
-            //tvAlerts.setText(savedText);
-            Log.d(LOG_TAG, "onCreateView() AlertFragment: before setVisibility()");
             tvAlerts.setVisibility(View.GONE);
         }
         else

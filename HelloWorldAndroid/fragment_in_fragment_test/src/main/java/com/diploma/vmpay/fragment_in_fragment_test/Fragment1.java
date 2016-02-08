@@ -16,43 +16,59 @@ import android.widget.Button;
 /**
  * Created by Andrew on 07.02.2016.
  */
-public class Fragment1 extends Fragment {
+public class Fragment1 extends Fragment implements View.OnClickListener {
 
     final String LOG_TAG = "myLogs";
     SharedPreferences sPref;
+    Button btnAddSP, btnClear, btnAddAlert;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d(LOG_TAG, "onCreateView() Fragment1");
         View v = inflater.inflate(R.layout.welcome_fragment, null);
 
-        Button button = (Button) v.findViewById(R.id.btnAddAlert);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Log.d(LOG_TAG, "ButtonAddAlert click in Fragment1");
-                sPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                SharedPreferences.Editor ed = sPref.edit();
-                ed.putString("SomePreferences", "Blah-Blah");
-                ed.commit();
-            }
-        });
-
-        Button button2 = (Button) v.findViewById(R.id.btnClearAlerts);
-        button2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Log.d(LOG_TAG, "ClearAlertsButton click in Fragment1");
-                sPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                SharedPreferences.Editor ed = sPref.edit();
-                ed.clear();
-                ed.commit();
-            }
-        });
-
-        /*Fragment frag2 = new AlertFragment();
+        Fragment frag2 = new AlertFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.add(R.id.fragmentSP, frag2);
-        ft.commit();*/
+        //ft.addToBackStack(null);
+        ft.commit();
+
+        btnAddSP = (Button) v.findViewById(R.id.btnAddSP);
+        btnClear = (Button) v.findViewById(R.id.btnClearAlerts);
+        btnAddAlert = (Button) v.findViewById(R.id.btnAddAlert);
+
+        btnAddAlert.setOnClickListener(this);
+        btnAddSP.setOnClickListener(this);
+        btnClear.setOnClickListener(this);
 
         return v;
+    }
+
+    @Override
+    public void onClick(View v) {
+        sPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor ed = sPref.edit();
+        switch (v.getId())
+        {
+            case R.id.btnAddSP:
+                Log.d(LOG_TAG, "AddSharedPreferences click in Fragment1");
+                ed.putString("SomePreferences", "Blah-Blah");
+                ed.commit();
+                break;
+            case R.id.btnClearAlerts:
+                Log.d(LOG_TAG, "ClearAlertsButton click in Fragment1");
+                ed.clear();
+                ed.commit();
+                break;
+            case R.id.btnAddAlert:
+                Log.d(LOG_TAG, "AddAlertButton click in Fragment1");
+                AddAlertFragment addAlertFragment = new AddAlertFragment();
+                FragmentTransaction fTrans;
+                fTrans = getFragmentManager().beginTransaction();
+                fTrans.replace(R.id.fragmentMain, addAlertFragment);
+                fTrans.addToBackStack(null);
+                fTrans.commit();
+                break;
+        }
     }
 }

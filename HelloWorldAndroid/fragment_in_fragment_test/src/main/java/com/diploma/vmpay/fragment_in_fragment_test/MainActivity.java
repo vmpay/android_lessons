@@ -16,9 +16,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Log.d(LOG_TAG, "onCreate() MainActivity");
-        /*Fragment frag1 = new Fragment1();
+        Fragment frag1 = new Fragment1();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.add(R.id.fragmentMain, frag1);
-        ft.commit();*/
+        //ft.addToBackStack(null);
+        ft.commit();
     }
+
+    @Override
+    public void onBackPressed() {
+        Log.d(LOG_TAG, "onCreate() MainActivity: onBackPressed BackStackCount = " + getFragmentManager().getBackStackEntryCount());
+        if (getFragmentManager().getBackStackEntryCount() >= 1){
+            Log.d(LOG_TAG, "onCreate() MainActivity: onBackPressed count > 1");
+            //getFragmentManager().popBackStackImmediate();
+            getFragmentManager().popBackStack();
+            getFragmentManager().beginTransaction().commit();
+        } else {
+            Log.d(LOG_TAG, "onCreate() MainActivity: onBackPressed count <= 1");
+            //handle finish
+            //finish(); // Closes app
+            super.onBackPressed();
+        }
+    }
+
 }
