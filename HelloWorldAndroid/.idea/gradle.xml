@@ -12,8 +12,10 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/fragment_in_fragment_test" />
             <option value="$PROJECT_DIR$/gladiatorsimulator" />
-            <option value="$PROJECT_DIR$/p1051_fragmentdynamic" />
-            <option value="$PROJECT_DIR$/p1061_fragmentactivity" />
+            <option value="$PROJECT_DIR$/p0421_simplelist" />
+            <option value="$PROJECT_DIR$/p0431_simplelistchoice" />
+            <option value="$PROJECT_DIR$/p0441_simplelistevents" />
+            <option value="$PROJECT_DIR$/p0451_expandablelist" />
           </set>
         </option>
       </GradleProjectSettings>
