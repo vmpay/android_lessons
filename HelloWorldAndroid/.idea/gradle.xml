@@ -12,10 +12,9 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/fragment_in_fragment_test" />
             <option value="$PROJECT_DIR$/gladiatorsimulator" />
-            <option value="$PROJECT_DIR$/p0421_simplelist" />
-            <option value="$PROJECT_DIR$/p0431_simplelistchoice" />
-            <option value="$PROJECT_DIR$/p0441_simplelistevents" />
-            <option value="$PROJECT_DIR$/p0451_expandablelist" />
+            <option value="$PROJECT_DIR$/p0371_sqliteinnerjoin" />
+            <option value="$PROJECT_DIR$/p0381_sqlitetransaction" />
+            <option value="$PROJECT_DIR$/p0391_sqliteonupgradedb" />
           </set>
         </option>
       </GradleProjectSettings>
