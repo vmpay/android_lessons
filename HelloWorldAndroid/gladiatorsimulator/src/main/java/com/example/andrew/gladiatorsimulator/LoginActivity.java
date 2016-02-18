@@ -13,8 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
+
 
 
 import static java.lang.Integer.parseInt;
@@ -36,7 +35,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        FacebookSdk.sdkInitialize(getApplicationContext());
 
         intentMain  = new Intent(this, MainActivity.class);
         intentSignup = new Intent(this, SignUpActivity.class);
@@ -60,22 +58,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
         image.startAnimation(anim);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        // Logs 'install' and 'app activate' App Events.
-        AppEventsLogger.activateApp(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        // Logs 'app deactivate' App Event.
-        AppEventsLogger.deactivateApp(this);
     }
 
     @Override

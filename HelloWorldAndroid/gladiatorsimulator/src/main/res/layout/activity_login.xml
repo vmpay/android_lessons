@@ -107,10 +107,5 @@
                 android:text="@string/register_text"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_weight="1"/>
-            <com.facebook.login.widget.LoginButton
-                android:id="@+id/login_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
     </LinearLayout>
 </LinearLayout>

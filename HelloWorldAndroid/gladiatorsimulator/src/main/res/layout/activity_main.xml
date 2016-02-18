@@ -22,7 +22,8 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
+        android:background="@android:color/darker_gray"
+        android:layout_margin="@dimen/view_margin"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -152,13 +153,15 @@
             android:id="@+id/spinner"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/border">
         </Spinner>
     </LinearLayout>
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
+        android:background="@android:color/darker_gray"
+        android:layout_margin="@dimen/view_margin"/>
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="match_parent"

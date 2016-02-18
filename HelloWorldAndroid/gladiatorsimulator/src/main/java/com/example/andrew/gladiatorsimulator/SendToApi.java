@@ -38,6 +38,7 @@ class SendToApi extends AsyncTask<String, Void, String> {
             urlConnection.disconnect();
         } catch (MalformedURLException e) {
             Log.d(TAG, "MalformedURLException");
+            tmp = "02";// No connection to the server...
             //e.printStackTrace();
         } catch (IOException e) {
             Log.d(TAG, "IOException");

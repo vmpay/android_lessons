@@ -3,11 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HelloWorldAndroid.iml" filepath="$PROJECT_DIR$/HelloWorldAndroid.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fragment_in_fragment_test/fragment_in_fragment_test.iml" filepath="$PROJECT_DIR$/fragment_in_fragment_test/fragment_in_fragment_test.iml" />
       <module fileurl="file://$PROJECT_DIR$/gladiatorsimulator/gladiatorsimulator.iml" filepath="$PROJECT_DIR$/gladiatorsimulator/gladiatorsimulator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/p0371_sqliteinnerjoin/p0371_sqliteinnerjoin.iml" filepath="$PROJECT_DIR$/p0371_sqliteinnerjoin/p0371_sqliteinnerjoin.iml" />
-      <module fileurl="file://$PROJECT_DIR$/p0381_sqlitetransaction/p0381_sqlitetransaction.iml" filepath="$PROJECT_DIR$/p0381_sqlitetransaction/p0381_sqlitetransaction.iml" />
-      <module fileurl="file://$PROJECT_DIR$/p0391_sqliteonupgradedb/p0391_sqliteonupgradedb.iml" filepath="$PROJECT_DIR$/p0391_sqliteonupgradedb/p0391_sqliteonupgradedb.iml" />
     </modules>
   </component>
 </project>
