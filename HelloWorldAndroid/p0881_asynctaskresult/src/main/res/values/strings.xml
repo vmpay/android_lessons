@@ -1,0 +1,5 @@
+<resources>
+	<string name="app_name">P0881_AsyncTaskResult</string>
+	<string name="start">Start</string>
+	<string name="status">Status</string>
+</resources>

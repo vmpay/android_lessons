@@ -11,6 +11,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/gladiatorsimulator" />
+            <option value="$PROJECT_DIR$/p0941_servicekillclient" />
+            <option value="$PROJECT_DIR$/p0942_servicekillserver" />
           </set>
         </option>
       </GradleProjectSettings>
