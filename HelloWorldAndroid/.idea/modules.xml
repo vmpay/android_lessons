@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/gladiatorsimulator/gladiatorsimulator.iml" filepath="$PROJECT_DIR$/gladiatorsimulator/gladiatorsimulator.iml" />
       <module fileurl="file://$PROJECT_DIR$/p0941_servicekillclient/p0941_servicekillclient.iml" filepath="$PROJECT_DIR$/p0941_servicekillclient/p0941_servicekillclient.iml" />
       <module fileurl="file://$PROJECT_DIR$/p0942_servicekillserver/p0942_servicekillserver.iml" filepath="$PROJECT_DIR$/p0942_servicekillserver/p0942_servicekillserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p_list_test/p_list_test.iml" filepath="$PROJECT_DIR$/p_list_test/p_list_test.iml" />
     </modules>
   </component>
 </project>
