@@ -4,9 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HelloWorldAndroid.iml" filepath="$PROJECT_DIR$/HelloWorldAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/gladiatorsimulator/gladiatorsimulator.iml" filepath="$PROJECT_DIR$/gladiatorsimulator/gladiatorsimulator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/p0941_servicekillclient/p0941_servicekillclient.iml" filepath="$PROJECT_DIR$/p0941_servicekillclient/p0941_servicekillclient.iml" />
-      <module fileurl="file://$PROJECT_DIR$/p0942_servicekillserver/p0942_servicekillserver.iml" filepath="$PROJECT_DIR$/p0942_servicekillserver/p0942_servicekillserver.iml" />
-      <module fileurl="file://$PROJECT_DIR$/p_list_test/p_list_test.iml" filepath="$PROJECT_DIR$/p_list_test/p_list_test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p0991_servicenotification/p0991_servicenotification.iml" filepath="$PROJECT_DIR$/p0991_servicenotification/p0991_servicenotification.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p1021_touch/p1021_touch.iml" filepath="$PROJECT_DIR$/p1021_touch/p1021_touch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p1031_multitouch/p1031_multitouch.iml" filepath="$PROJECT_DIR$/p1031_multitouch/p1031_multitouch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p1381_location/p1381_location.iml" filepath="$PROJECT_DIR$/p1381_location/p1381_location.iml" />
     </modules>
   </component>
 </project>
