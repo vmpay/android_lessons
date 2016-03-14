@@ -11,12 +11,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/gladiatorsimulator" />
-            <option value="$PROJECT_DIR$/p0991_servicenotification" />
-            <option value="$PROJECT_DIR$/p1021_touch" />
-            <option value="$PROJECT_DIR$/p1031_multitouch" />
-            <option value="$PROJECT_DIR$/p1061_fragmentactivity" />
-            <option value="$PROJECT_DIR$/p1071_actionbaritems" />
-            <option value="$PROJECT_DIR$/p1381_location" />
+            <option value="$PROJECT_DIR$/p1101_dialogfragment" />
+            <option value="$PROJECT_DIR$/p1111_preferencefragment" />
           </set>
         </option>
       </GradleProjectSettings>
