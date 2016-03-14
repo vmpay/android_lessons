@@ -7,6 +7,8 @@
       <module fileurl="file://$PROJECT_DIR$/p0991_servicenotification/p0991_servicenotification.iml" filepath="$PROJECT_DIR$/p0991_servicenotification/p0991_servicenotification.iml" />
       <module fileurl="file://$PROJECT_DIR$/p1021_touch/p1021_touch.iml" filepath="$PROJECT_DIR$/p1021_touch/p1021_touch.iml" />
       <module fileurl="file://$PROJECT_DIR$/p1031_multitouch/p1031_multitouch.iml" filepath="$PROJECT_DIR$/p1031_multitouch/p1031_multitouch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p1061_fragmentactivity/p1061_fragmentactivity.iml" filepath="$PROJECT_DIR$/p1061_fragmentactivity/p1061_fragmentactivity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p1071_actionbaritems/p1071_actionbaritems.iml" filepath="$PROJECT_DIR$/p1071_actionbaritems/p1071_actionbaritems.iml" />
       <module fileurl="file://$PROJECT_DIR$/p1381_location/p1381_location.iml" filepath="$PROJECT_DIR$/p1381_location/p1381_location.iml" />
     </modules>
   </component>

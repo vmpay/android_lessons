@@ -16,7 +16,7 @@ import android.widget.Button;
 public class Fragment2 extends Fragment {
 
     public interface onSomeEventListener {
-        public void someEvent(String s);
+        void someEvent(String s);
     }
 
     onSomeEventListener someEventListener;
