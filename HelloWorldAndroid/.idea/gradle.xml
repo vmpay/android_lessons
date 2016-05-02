@@ -11,8 +11,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/gladiatorsimulator" />
-            <option value="$PROJECT_DIR$/p1101_dialogfragment" />
-            <option value="$PROJECT_DIR$/p1111_preferencefragment" />
+            <option value="$PROJECT_DIR$/p0991_servicenotification" />
+            <option value="$PROJECT_DIR$/p1131_actionmode" />
+            <option value="$PROJECT_DIR$/p1151_multiplescreen" />
           </set>
         </option>
       </GradleProjectSettings>
